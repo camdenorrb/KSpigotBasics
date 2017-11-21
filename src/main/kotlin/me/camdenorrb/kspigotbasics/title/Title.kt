@@ -2,17 +2,18 @@ package me.camdenorrb.kspigotbasics.title
 
 import me.camdenorrb.kspigotbasics.ext.kBasic
 import me.camdenorrb.kspigotbasics.struct.chatSerializerAMethod
+import me.camdenorrb.kspigotbasics.struct.enumTitleActionClass
 import me.camdenorrb.kspigotbasics.struct.server
 import me.camdenorrb.kspigotbasics.utils.nmsClass
 import org.bukkit.entity.Player
 
 
 private val titleType by lazy {
-	nmsClass("PacketPlayOutTitle\$EnumTitleAction").enumConstants[0]
+	enumTitleActionClass.enumConstants[0]
 }
 
 private val subtitleType by lazy {
-	nmsClass("PacketPlayOutTitle\$EnumTitleAction").enumConstants[1]
+	enumTitleActionClass.enumConstants[1]
 }
 
 private val outTitleConstruct by lazy {
