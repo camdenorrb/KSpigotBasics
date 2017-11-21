@@ -12,7 +12,7 @@ class KSpigotBasics : JavaPlugin() {
 
 	override fun onDisable() { KBasicPlayerCache.disable() }
 
-	
+
 	companion object {
 
 		lateinit var instance: KSpigotBasics
