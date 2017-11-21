@@ -9,10 +9,10 @@ val pluginManager by lazy { server.pluginManager!! }
 
 // NMS Reflection
 
-val enumTitleActionClass by lazy {
+internal val enumTitleActionClass by lazy {
 	nmsClass("PacketPlayOutTitle\$EnumTitleAction")
 }
 
-val chatSerializerAMethod by lazy {
+internal val chatSerializerAMethod by lazy {
 	nmsClass("IChatBaseComponent\$ChatSerializer").getMethod("a", String::class.java)!!
 }
