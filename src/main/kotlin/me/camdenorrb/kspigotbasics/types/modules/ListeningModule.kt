@@ -1,7 +1,7 @@
 package me.camdenorrb.kspigotbasics.types.modules
 
+import me.camdenorrb.kspigotbasics.spigotBasics
 import me.camdenorrb.kspigotbasics.struct.server
-import me.camdenorrb.kspigotbasics.struct.spigotBasics
 import org.bukkit.event.HandlerList
 import org.bukkit.event.Listener
 

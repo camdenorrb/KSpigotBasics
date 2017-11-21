@@ -13,6 +13,7 @@ import org.bukkit.event.Listener
 import org.bukkit.scoreboard.DisplaySlot
 import org.bukkit.scoreboard.Objective
 import org.bukkit.scoreboard.Team
+import java.util.function.Consumer
 
 
 open class Board : Openable<Player> {
@@ -52,6 +53,7 @@ open class Board : Openable<Player> {
 		return scoreboard.registerNewTeam(name)!!
 	}
 
+	@JvmSynthetic
 	fun createTeam(name: String, build: Team.() -> Unit) {
 		createTeam(name).also(build)
 	}
@@ -62,6 +64,7 @@ open class Board : Openable<Player> {
 		return SideBar(name).also { sideBar = it }
 	}
 
+	@JvmSynthetic
 	fun createSideBar(name: String, size: Int, builder: SideBarBuilder.() -> Unit = {}): SideBar {
 
 		sideBar?.unregister()
@@ -70,11 +73,24 @@ open class Board : Openable<Player> {
 		return sideBar!!
 	}
 
-
+	@JvmSynthetic
 	fun createObj(name: String, criteria: String = "dummy", build: Objective.() -> Unit = {}): Objective {
 		return scoreboard.registerNewObjective(name, criteria).also(build)
 	}
 
+
+	fun createTeam(name: String, consumer: Consumer<Team>) = createTeam(name) {
+		consumer.accept(this)
+	}
+
+	fun createSideBar(name: String, size: Int, consumer: Consumer<SideBarBuilder>) = createSideBar(name, size) {
+		consumer.accept(this)
+	}
+
+	@JvmOverloads
+	fun createObj(name: String, criteria: String = "dummy", consumer: Consumer<Objective>) = createObj(name, criteria) {
+		consumer.accept(this)
+	}
 
 
 	inner class SideBar internal constructor(val name: String) {

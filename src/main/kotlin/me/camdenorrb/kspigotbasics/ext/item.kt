@@ -2,8 +2,7 @@ package me.camdenorrb.kspigotbasics.ext
 
 import org.bukkit.inventory.ItemStack
 import org.bukkit.inventory.meta.*
-
-
+import java.util.function.Consumer
 
 
 // Meta Extensions
@@ -12,7 +11,6 @@ inline fun ItemStack.meta(block: ItemMeta.() -> Unit): ItemStack {
 	itemMeta = itemMeta.also(block)
 	return this
 }
-
 
 inline fun ItemStack.mapMeta(block: MapMeta.() -> Unit): ItemStack {
 	return meta { block(this as MapMeta) }
@@ -52,8 +50,46 @@ inline fun ItemStack.enchantStorageMeta(block: EnchantmentStorageMeta.() -> Unit
 
 
 
+// For the Java users ;)
+
+fun ItemStack.meta(consumer: Consumer<ItemMeta>) = meta {
+	consumer.accept(this)
+}
 
 
+fun ItemStack.mapMeta(consumer: Consumer<MapMeta>) = mapMeta {
+	consumer.accept(this)
+}
+
+fun ItemStack.skullMeta(consumer: Consumer<SkullMeta>) = skullMeta {
+	consumer.accept(this)
+}
+
+fun ItemStack.potionMeta(consumer: Consumer<PotionMeta>) = potionMeta {
+	consumer.accept(this)
+}
+
+fun ItemStack.fireWorkMeta(consumer: Consumer<FireworkMeta>) = fireWorkMeta {
+	consumer.accept(this)
+}
+
+fun ItemStack.spawnEggMeta(consumer: Consumer<SpawnEggMeta>) = spawnEggMeta {
+	consumer.accept(this)
+}
+
+fun ItemStack.leatherArmorMeta(consumer: Consumer<LeatherArmorMeta>) = leatherArmorMeta {
+	consumer.accept(this)
+}
+
+fun ItemStack.knowledgeBookMeta(consumer: Consumer<KnowledgeBookMeta>) = knowledgeBookMeta {
+	consumer.accept(this)
+}
+
+fun ItemStack.fireWorkEffectMeta(consumer: Consumer<FireworkEffectMeta>) = fireWorkEffectMeta {
+	consumer.accept(this)
+}
 
 
-
+fun ItemStack.enchantStorageMeta(consumer: Consumer<EnchantmentStorageMeta>) = enchantStorageMeta {
+	consumer.accept(this)
+}
