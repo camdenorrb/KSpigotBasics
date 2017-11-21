@@ -36,7 +36,7 @@ open class Board : Openable<Player> {
 	operator fun get(displaySlot: DisplaySlot): Objective? = scoreboard.getObjective(displaySlot)
 
 
-	override fun open(player: Player) { player.scoreboard = scoreboard }
+	override fun open(target: Player) { target.scoreboard = scoreboard }
 
 
 	fun findTeam(player: Player): Team? {

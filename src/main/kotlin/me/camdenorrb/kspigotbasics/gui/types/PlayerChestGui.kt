@@ -16,8 +16,8 @@ abstract class PlayerChestGui(val title: String, val size: Int = 27) : Gui, Modu
 	protected open fun onDestroy(player: Player) = Unit
 
 
-	override fun open(player: Player) {
-		invoke(player).open(player)
+	override fun open(target: Player) {
+		invoke(target).open(target)
 	}
 
 	override fun invoke(player: Player): ChestGui {

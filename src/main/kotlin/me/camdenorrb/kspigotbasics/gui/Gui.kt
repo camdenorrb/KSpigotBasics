@@ -7,6 +7,6 @@ import org.bukkit.entity.Player
 
 interface Gui : Constructable, Openable<Player> {
 
-	override fun open(t: Player) = Unit
+	override fun open(target: Player) = Unit
 
 }

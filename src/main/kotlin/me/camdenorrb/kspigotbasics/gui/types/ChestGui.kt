@@ -23,8 +23,8 @@ abstract class ChestGui(title: String, size: Int = 27): ListeningModule(), Gui {
 	override final fun onStop() = deconstruct()
 
 
-	override fun open(player: Player) {
-		player.openInventory(inventory)
+	override fun open(target: Player) {
+		target.openInventory(inventory)
 	}
 
 
