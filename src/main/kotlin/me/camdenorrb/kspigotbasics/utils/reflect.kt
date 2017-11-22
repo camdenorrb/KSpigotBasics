@@ -3,7 +3,7 @@ package me.camdenorrb.kspigotbasics.utils
 import me.camdenorrb.kspigotbasics.struct.server
 
 
-private val version by lazy { server.javaClass.packageName.substring(23) }
+private val version by lazy { server.javaClass.`package`.name.substring(23) }
 
 
 fun nmsClass(name: String) = Class.forName("net.minecraft.server.$version.$name")!!

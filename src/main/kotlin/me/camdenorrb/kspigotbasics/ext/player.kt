@@ -9,6 +9,10 @@ import org.bukkit.inventory.ItemStack
 fun Player.kBasic() = KBasicPlayerCache.basicPlayers[this]!!
 
 
+fun skull(playerName: String) = ItemStack(SKULL_ITEM, 1, 3).skullMeta {
+	owner = playerName
+}
+
 fun Player.skull() = ItemStack(SKULL_ITEM, 1, 3).skullMeta {
 	owner = this@skull.name
 }

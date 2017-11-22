@@ -34,7 +34,6 @@ abstract class PlayerChestGui(val title: String, val size: Int = 27) : Gui, Modu
 		playerChests.clear()
 	}
 
-
 	fun deconstruct(player: Player) {
 		onDestroy(player)
 		playerChests.remove(player)

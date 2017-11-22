@@ -9,6 +9,7 @@ import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.inventory.InventoryClickEvent
 import org.bukkit.inventory.ItemStack
+import java.util.function.Consumer
 
 
 abstract class ChestGui(title: String, size: Int = 27): ListeningModule(), Gui {
@@ -16,6 +17,11 @@ abstract class ChestGui(title: String, size: Int = 27): ListeningModule(), Gui {
 	val chestSlots = mutableMapOf<Int, ChestSlot>()
 
 	val inventory = server.createInventory(null, size, title)!!
+
+
+	protected open fun construct() = Unit
+
+	protected open fun deconstruct() = Unit
 
 
 	override final fun onStart() = construct()
@@ -28,9 +34,21 @@ abstract class ChestGui(title: String, size: Int = 27): ListeningModule(), Gui {
 	}
 
 
-	fun Material.setSlots(slots: IntRange) = slots.forEach { setSlot(it) }
+	inline fun Material.setSlots(slotRange: IntRange, block: (ChestSlot) -> Unit = {})
+		= ItemStack(this).setSlots(slotRange, block)
 
-	fun ItemStack.setSlots(slots: IntRange) = slots.forEach { setSlot(it) }
+	inline fun ItemStack.setSlots(slotRange: IntRange, block: (ChestSlot) -> Unit = {}) = slotRange.forEach {
+		block(setSlot(it))
+	}
+
+
+	@JvmOverloads
+	fun Material.setSlots(slotRange: IntRange, consumer: Consumer<ChestSlot> = Consumer {  })
+		= setSlots(slotRange) { consumer.accept(it) }
+
+	@JvmOverloads
+	fun ItemStack.setSlots(slotRange: IntRange, consumer: Consumer<ChestSlot> = Consumer {  })
+		= setSlots(slotRange) { consumer.accept(it) }
 
 
 	fun Material.setSlot(slot: Int): ChestSlot {
@@ -55,7 +73,7 @@ abstract class ChestGui(title: String, size: Int = 27): ListeningModule(), Gui {
 
 
 	@EventHandler
-	fun onClick(event: InventoryClickEvent) {
+	private fun onClick(event: InventoryClickEvent) {
 
 		if (event.clickedInventory != inventory) return
 		event.isCancelled = true
