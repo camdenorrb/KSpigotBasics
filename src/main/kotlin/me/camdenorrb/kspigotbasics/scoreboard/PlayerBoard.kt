@@ -37,11 +37,11 @@ abstract class PlayerBoard : ListeningModule() {
 
 		onPoison()
 
-		server.onlinePlayers.filter { (it.scoreboard as? Board) in boards.values }.forEach {
-			it.scoreboard = server.scoreboardManager.mainScoreboard
+		boards.forEach {
+			it.key.scoreboard = server.scoreboardManager.mainScoreboard
+			unload(it.key)
 		}
 
-		boards.forEach { unload(it.key) }
 		cleanUpTask.cancel()
 	}
 
