@@ -1,3 +1,5 @@
+@file:JvmName("TeamExt")
+
 package me.camdenorrb.kspigotbasics.scoreboard.ext
 
 import org.bukkit.entity.Player

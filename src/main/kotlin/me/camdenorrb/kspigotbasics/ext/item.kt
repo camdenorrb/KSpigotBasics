@@ -1,3 +1,5 @@
+@file:JvmName("ItemExt")
+
 package me.camdenorrb.kspigotbasics.ext
 
 import org.bukkit.inventory.ItemStack
@@ -7,11 +9,13 @@ import java.util.function.Consumer
 
 // Meta Extensions
 
+@JvmSynthetic
 inline fun ItemStack.meta(block: ItemMeta.() -> Unit): ItemStack {
 	itemMeta = itemMeta.also(block)
 	return this
 }
 
+@JvmSynthetic
 inline fun ItemStack.mapMeta(block: MapMeta.() -> Unit): ItemStack {
 	return meta { block(this as MapMeta) }
 }
@@ -20,30 +24,37 @@ inline fun ItemStack.skullMeta(block: SkullMeta.() -> Unit): ItemStack {
 	return meta { block(this as SkullMeta) }
 }
 
+@JvmSynthetic
 inline fun ItemStack.potionMeta(block: PotionMeta.() -> Unit): ItemStack {
 	return meta { block(this as PotionMeta) }
 }
 
+@JvmSynthetic
 inline fun ItemStack.fireWorkMeta(block: FireworkMeta.() -> Unit): ItemStack {
 	return meta { block(this as FireworkMeta) }
 }
 
+@JvmSynthetic
 inline fun ItemStack.spawnEggMeta(block: SpawnEggMeta.() -> Unit): ItemStack {
 	return meta { block(this as SpawnEggMeta) }
 }
 
+@JvmSynthetic
 inline fun ItemStack.leatherArmorMeta(block: LeatherArmorMeta.() -> Unit): ItemStack {
 	return meta { block(this as LeatherArmorMeta) }
 }
 
+@JvmSynthetic
 inline fun ItemStack.knowledgeBookMeta(block: KnowledgeBookMeta.() -> Unit): ItemStack {
 	return meta { block(this as KnowledgeBookMeta) }
 }
 
+@JvmSynthetic
 inline fun ItemStack.fireWorkEffectMeta(block: FireworkEffectMeta.() -> Unit): ItemStack {
 	return meta { block(this as FireworkEffectMeta) }
 }
 
+@JvmSynthetic
 inline fun ItemStack.enchantStorageMeta(block: EnchantmentStorageMeta.() -> Unit): ItemStack {
 	return meta { block(this as EnchantmentStorageMeta) }
 }

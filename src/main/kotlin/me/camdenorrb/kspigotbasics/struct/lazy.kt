@@ -1,3 +1,6 @@
+@file:JvmName("LazyStruct")
+
+
 package me.camdenorrb.kspigotbasics.struct
 
 import me.camdenorrb.kspigotbasics.utils.nmsClass

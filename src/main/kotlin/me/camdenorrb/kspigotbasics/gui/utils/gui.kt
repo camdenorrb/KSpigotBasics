@@ -1,3 +1,5 @@
+@file:JvmName("GuiUtils")
+
 package me.camdenorrb.kspigotbasics.gui.utils
 
 import me.camdenorrb.kspigotbasics.gui.types.ChestGui

@@ -1,3 +1,5 @@
+@file:JvmName("TextExt")
+
 package me.camdenorrb.kspigotbasics.ext
 
 import org.bukkit.ChatColor.translateAlternateColorCodes

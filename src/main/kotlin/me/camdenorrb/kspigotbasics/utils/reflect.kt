@@ -1,3 +1,5 @@
+@file:JvmName("ReflectUtils")
+
 package me.camdenorrb.kspigotbasics.utils
 
 import me.camdenorrb.kspigotbasics.struct.server

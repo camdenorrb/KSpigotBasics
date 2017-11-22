@@ -1,3 +1,5 @@
+@file:JvmName("BoardUtils")
+
 package me.camdenorrb.kspigotbasics.scoreboard.utils
 
 import me.camdenorrb.kspigotbasics.scoreboard.Board

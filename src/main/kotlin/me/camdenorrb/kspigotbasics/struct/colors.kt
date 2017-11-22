@@ -1,3 +1,6 @@
+@file:JvmName("ColorStruct")
+
+
 package me.camdenorrb.kspigotbasics.struct
 
 

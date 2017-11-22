@@ -73,7 +73,7 @@ abstract class ChestGui(title: String, size: Int = 27): ListeningModule(), Gui {
 
 
 	@EventHandler
-	private fun onClick(event: InventoryClickEvent) {
+	internal fun onClick(event: InventoryClickEvent) {
 
 		if (event.clickedInventory != inventory) return
 		event.isCancelled = true
