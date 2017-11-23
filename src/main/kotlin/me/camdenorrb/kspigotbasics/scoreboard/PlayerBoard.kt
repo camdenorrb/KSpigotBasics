@@ -13,7 +13,7 @@ abstract class PlayerBoard : ListeningModule() {
 
 	val boards = mutableMapOf<Player, Board>()
 
-	private var cleanUpTask: BukkitTask? = null
+	private lateinit var cleanUpTask: BukkitTask
 
 
 	protected open fun onInitiate() = Unit
@@ -33,10 +33,7 @@ abstract class PlayerBoard : ListeningModule() {
 
 	override final fun onStop() {
 
-		val task = cleanUpTask
-
-		// Was !this::cleanUpTask.isInitialized
-		if (task == null || task.isCancelled) return
+		if (!this::cleanUpTask.isInitialized || cleanUpTask.isCancelled) return
 
 		onPoison()
 
@@ -46,7 +43,7 @@ abstract class PlayerBoard : ListeningModule() {
 			unload(player)
 		}
 
-		task.cancel()
+		cleanUpTask.cancel()
 	}
 
 
