@@ -1,5 +1,5 @@
 group 'me.camdenorrb'
-version '1.0.0'
+version '1.0.1'
 
 buildscript {
 
@@ -40,7 +40,7 @@ dependencies {
 
 	compileOnly "org.spigotmc:spigot:$spigotVersion"
 
-	// TODO: Put new Keury and Kedis in here.
+	// TODO: Put new Kuery and Kedis in here.
 	compile "org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion"
 	compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
 	compile "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutineVersion"
