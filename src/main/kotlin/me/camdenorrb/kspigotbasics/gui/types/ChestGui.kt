@@ -41,9 +41,11 @@ abstract class ChestGui(title: String, size: Int = 27): ListeningModule(), Gui {
 	}
 
 
+	@JvmSynthetic
 	inline fun Material.setSlots(slotRange: IntRange, block: (ChestSlot) -> Unit = {})
 		= ItemStack(this).setSlots(slotRange, block)
 
+	@JvmSynthetic
 	inline fun ItemStack.setSlots(slotRange: IntRange, block: (ChestSlot) -> Unit = {}) = slotRange.forEach {
 		block(setSlot(it))
 	}
@@ -55,11 +57,13 @@ abstract class ChestGui(title: String, size: Int = 27): ListeningModule(), Gui {
 
 
 	@JvmOverloads
-	fun Material.setSlots(slotRange: IntRange, consumer: Consumer<ChestSlot> = Consumer {  })
+	@JvmName("setSlots")
+	fun Material.setJSlots(slotRange: IntRange, consumer: Consumer<ChestSlot> = Consumer { })
 		= setSlots(slotRange) { consumer.accept(it) }
 
 	@JvmOverloads
-	fun ItemStack.setSlots(slotRange: IntRange, consumer: Consumer<ChestSlot> = Consumer {  })
+	@JvmName("setSlots")
+	fun ItemStack.setJSlots(slotRange: IntRange, consumer: Consumer<ChestSlot> = Consumer { })
 		= setSlots(slotRange) { consumer.accept(it) }
 
 

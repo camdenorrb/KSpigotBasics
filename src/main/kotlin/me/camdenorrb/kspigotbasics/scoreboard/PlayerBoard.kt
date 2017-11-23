@@ -9,7 +9,7 @@ import org.bukkit.event.player.PlayerQuitEvent
 import org.bukkit.scheduler.BukkitTask
 
 
-abstract class PlayerBoard : ListeningModule() {
+abstract class PlayerBoard : ListeningModule(), (Player) -> Unit {
 
 	val boards = mutableMapOf<Player, Board>()
 
@@ -26,6 +26,9 @@ abstract class PlayerBoard : ListeningModule() {
 	protected open fun Board.onUnload(player: Player) = Unit
 
 
+	override fun invoke(player: Player) = construct(player).open(player)
+
+
 	override final fun onStart() {
 		cleanUpTask = server.scheduler.runTaskTimerAsynchronously(spigotBasics, ::cleanUp, 6000, 6000)
 		onInitiate()
@@ -38,7 +41,7 @@ abstract class PlayerBoard : ListeningModule() {
 		onPoison()
 
 		boards.forEach { (player, board) ->
-			if (player.scoreboard != board.scoreboard)
+			if (player.scoreboard != board.scoreboard) return@forEach
 			player.scoreboard = server.scoreboardManager.mainScoreboard
 			unload(player)
 		}

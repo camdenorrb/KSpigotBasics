@@ -44,6 +44,8 @@ dependencies {
 	compile "org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion"
 	compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
 	compile "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutineVersion"
+
+	compile "me.camdenorrb:MiniBus:1.2.3"
 }
 
 compileKotlin {

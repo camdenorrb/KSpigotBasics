@@ -20,6 +20,7 @@ inline fun ItemStack.mapMeta(block: MapMeta.() -> Unit): ItemStack {
 	return meta { block(this as MapMeta) }
 }
 
+@JvmSynthetic
 inline fun ItemStack.skullMeta(block: SkullMeta.() -> Unit): ItemStack {
 	return meta { block(this as SkullMeta) }
 }

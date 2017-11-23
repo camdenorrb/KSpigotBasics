@@ -4,9 +4,10 @@
 package me.camdenorrb.kspigotbasics.struct
 
 import me.camdenorrb.kspigotbasics.utils.nmsClass
+import me.camdenorrb.minibus.MiniBus
 
 
-val pluginManager by lazy { server.pluginManager!! }
+val miniBus by lazy { MiniBus() }
 
 
 

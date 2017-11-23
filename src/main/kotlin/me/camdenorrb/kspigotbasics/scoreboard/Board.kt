@@ -16,6 +16,7 @@ import org.bukkit.scoreboard.Team
 import java.util.function.Consumer
 
 
+// TODO: Make a inlined scoreboard, which will attribute to the player's current scoreboard or make a new one if main.
 open class Board : Openable<Player> {
 
 	val scoreboard = server.scoreboardManager.newScoreboard!!
@@ -198,6 +199,9 @@ open class Board : Openable<Player> {
 		}
 
 
+		// TODO: Better Java support.
+		// TODO: Possibly set a default prefix and default value instead of the text itself. It can be 2 functions if needed.
+		@JvmSynthetic
 		inline fun <reified E : Event> listeningText(initial: String = "", noinline block: E.() -> String) {
 
 			check(currentIndex in 0..realSize) { "Tried to add a entry out of range!" }
@@ -212,6 +216,7 @@ open class Board : Openable<Player> {
 			}
 
 		}
+
 
 	}
 
