@@ -3,16 +3,15 @@ version '1.0.0'
 
 buildscript {
 
-    ext {
-	    shadowVersion = '2.0.1'
-	    coroutineVersion = '0.19.3'
-	    kotlinVersion = '1.2.0-rc-39'
+	ext {
+		shadowVersion = '2.0.1'
+		kotlinVersion = '1.1.60'
+		coroutineVersion = '0.19.3'
 	    spigotVersion = '1.12.2-R0.1-SNAPSHOT'
     }
 
     repositories {
 	    jcenter()
-	    maven { url 'http://dl.bintray.com/kotlin/kotlin-eap-1.2' }
     }
 
     dependencies {
@@ -29,7 +28,6 @@ apply plugin: 'com.github.johnrengelman.shadow'
 
 
 repositories {
-	maven { url 'http://dl.bintray.com/kotlin/kotlin-eap-1.2' }
 	mavenLocal()
 	mavenCentral()
 }

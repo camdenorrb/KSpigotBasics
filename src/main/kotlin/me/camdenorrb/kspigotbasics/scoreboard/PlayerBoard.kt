@@ -13,7 +13,7 @@ abstract class PlayerBoard : ListeningModule() {
 
 	val boards = mutableMapOf<Player, Board>()
 
-	private lateinit var cleanUpTask: BukkitTask
+	private var cleanUpTask: BukkitTask? = null
 
 
 	protected open fun onInitiate() = Unit
@@ -33,16 +33,20 @@ abstract class PlayerBoard : ListeningModule() {
 
 	override final fun onStop() {
 
-		if (!this::cleanUpTask.isInitialized || cleanUpTask.isCancelled) return
+		val task = cleanUpTask
+
+		// Was !this::cleanUpTask.isInitialized
+		if (task == null || task.isCancelled) return
 
 		onPoison()
 
-		boards.forEach {
-			it.key.scoreboard = server.scoreboardManager.mainScoreboard
-			unload(it.key)
+		boards.forEach { (player, board) ->
+			if (player.scoreboard != board.scoreboard)
+			player.scoreboard = server.scoreboardManager.mainScoreboard
+			unload(player)
 		}
 
-		cleanUpTask.cancel()
+		task.cancel()
 	}
 
 

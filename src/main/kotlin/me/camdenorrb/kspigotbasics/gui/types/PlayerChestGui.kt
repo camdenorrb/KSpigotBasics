@@ -10,7 +10,7 @@ abstract class PlayerChestGui(val title: String, val size: Int = 27) : Gui, Modu
 
 	val playerChests = mutableMapOf<Player, ChestGui>()
 
-
+	
 	protected abstract fun onConstruct(player: Player, chestGui: ChestGui)
 
 	protected open fun onDestroy(player: Player) = Unit
@@ -29,10 +29,12 @@ abstract class PlayerChestGui(val title: String, val size: Int = 27) : Gui, Modu
 
 	override final fun enable() = Unit
 
+
 	override final fun disable() {
 		playerChests.forEach { onDestroy(it.key) }
 		playerChests.clear()
 	}
+
 
 	fun deconstruct(player: Player) {
 		onDestroy(player)
