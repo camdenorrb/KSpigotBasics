@@ -21,7 +21,7 @@ private val outTitleConstruct by lazy {
 }
 
 
-data class Title(var title: String, var subtitle: String, var fadeIn: Int, var stay: Int, var fadeOut: Int) {
+data class Title @JvmOverloads constructor(var title: String, var subtitle: String, var fadeIn: Int = 1, var stay: Int = 1, var fadeOut: Int = 1) {
 
 	fun send(player: Player) {
 

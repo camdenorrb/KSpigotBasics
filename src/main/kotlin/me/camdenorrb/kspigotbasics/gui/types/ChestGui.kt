@@ -1,7 +1,7 @@
 package me.camdenorrb.kspigotbasics.gui.types
 
 import me.camdenorrb.kspigotbasics.gui.Gui
-import me.camdenorrb.kspigotbasics.gui.events.ChestClickAction
+import me.camdenorrb.kspigotbasics.gui.actions.ChestClickAction
 import me.camdenorrb.kspigotbasics.gui.slot.ChestSlot
 import me.camdenorrb.kspigotbasics.struct.ChestClickBlock
 import me.camdenorrb.kspigotbasics.struct.server

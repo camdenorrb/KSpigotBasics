@@ -1,4 +1,4 @@
-package me.camdenorrb.kspigotbasics.gui.events
+package me.camdenorrb.kspigotbasics.gui.actions
 
 import me.camdenorrb.kspigotbasics.gui.Gui
 import me.camdenorrb.kspigotbasics.gui.types.ChestGui

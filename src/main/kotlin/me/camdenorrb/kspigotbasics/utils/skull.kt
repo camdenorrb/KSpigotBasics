@@ -14,11 +14,12 @@ fun skull() = ItemStack(SKULL_ITEM, 1, 3)
 
 
 fun skull(uuid: UUID) = ItemStack(SKULL_ITEM, 1, 3).skullMeta {
-	owner = findOfflinePlayer(uuid)?.name
+	findOfflinePlayer(uuid)!!.skull()
 }
 
+// TODO: Use reflection.
 fun OfflinePlayer.skull() = ItemStack(SKULL_ITEM, 1, 3).skullMeta {
-	owner = this@skull.name
+	skull(this@skull.name)
 }
 
 fun skull(playerName: String) = ItemStack(SKULL_ITEM, 1, 3).skullMeta {

@@ -14,9 +14,18 @@ val miniBus by lazy { MiniBus() }
 // NMS Reflection
 
 internal val enumTitleActionClass by lazy {
-	nmsClass("PacketPlayOutTitle\$EnumTitleAction")
+	try { nmsClass("PacketPlayOutTitle\$EnumTitleAction") }
+	catch (ex: ClassNotFoundException) { nmsClass("EnumTitleAction") }
 }
 
 internal val chatSerializerAMethod by lazy {
-	nmsClass("IChatBaseComponent\$ChatSerializer").getMethod("a", String::class.java)!!
+
+	val clazz = try {
+		nmsClass("IChatBaseComponent\$ChatSerializer")
+	} catch (ex: ClassNotFoundException) {
+		nmsClass("ChatSerializer")
+	}
+
+	clazz.getMethod("a", String::class.java)!!
 }
+

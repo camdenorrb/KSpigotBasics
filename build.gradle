@@ -1,12 +1,12 @@
 group 'me.camdenorrb'
-version '1.0.1'
+version '1.0.2'
 
 buildscript {
 
 	ext {
 		shadowVersion = '2.0.1'
 		coroutineVersion = '0.19.3'
-		kotlinVersion = '1.2.0-rc-39'
+		kotlinVersion = '1.2.0-rc-84'
 		spigotVersion = '1.12.2-R0.1-SNAPSHOT'
     }
 

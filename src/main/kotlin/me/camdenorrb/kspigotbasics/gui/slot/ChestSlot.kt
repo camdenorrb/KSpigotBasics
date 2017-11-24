@@ -1,6 +1,6 @@
 package me.camdenorrb.kspigotbasics.gui.slot
 
-import me.camdenorrb.kspigotbasics.gui.events.ChestClickAction
+import me.camdenorrb.kspigotbasics.gui.actions.ChestClickAction
 import me.camdenorrb.kspigotbasics.struct.ChestClickBlock
 import org.bukkit.event.inventory.ClickType
 import org.bukkit.event.inventory.ClickType.LEFT
