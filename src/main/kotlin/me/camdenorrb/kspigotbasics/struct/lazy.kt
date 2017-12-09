@@ -9,6 +9,7 @@ import me.camdenorrb.minibus.MiniBus
 
 val miniBus by lazy { MiniBus() }
 
+val mainWorld by lazy { server.worlds.first() }
 
 
 // NMS Reflection

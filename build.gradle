@@ -5,14 +5,13 @@ buildscript {
 
 	ext {
 		shadowVersion = '2.0.1'
+		kotlinVersion = '1.2.0'
 		coroutineVersion = '0.19.3'
-		kotlinVersion = '1.2.0-rc-84'
 		spigotVersion = '1.12.2-R0.1-SNAPSHOT'
     }
 
     repositories {
 	    jcenter()
-	    maven { url 'http://dl.bintray.com/kotlin/kotlin-eap-1.2' }
     }
 
     dependencies {
@@ -33,19 +32,22 @@ repositories {
 	mavenLocal()
 	mavenCentral()
 
-	maven { url 'http://dl.bintray.com/kotlin/kotlin-eap-1.2' }
+	maven { url 'http://nexus.okkero.com/repository/maven-releases/' }
 }
 
 dependencies {
 
 	compileOnly "org.spigotmc:spigot:$spigotVersion"
 
-	// TODO: Put new Kuery and Kedis in here.
+	compile "com.sxtanna.db:Kuery:+"
+	compile "com.sxtanna.database:Kedis:+"
+
+	compile "me.camdenorrb:MiniBus:1.2.3"
+	compile "com.okkero.skedule:skedule:1.2.3"
+
 	compile "org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion"
 	compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
 	compile "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutineVersion"
-
-	compile "me.camdenorrb:MiniBus:1.2.3"
 }
 
 compileKotlin {

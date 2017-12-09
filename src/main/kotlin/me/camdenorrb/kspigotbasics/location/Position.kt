@@ -1,4 +1,4 @@
-package me.camdenorrb.kspigotbasics.position
+package me.camdenorrb.kspigotbasics.location
 
 import me.camdenorrb.kspigotbasics.struct.server
 import org.bukkit.Location

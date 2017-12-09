@@ -1,6 +1,8 @@
 package me.camdenorrb.kspigotbasics
 
 import me.camdenorrb.kspigotbasics.cache.KBasicPlayerCache
+import me.camdenorrb.kspigotbasics.ext.register
+import me.camdenorrb.kspigotbasics.listeners.CoreListener
 import me.camdenorrb.kspigotbasics.struct.miniBus
 import org.bukkit.plugin.java.JavaPlugin
 
@@ -13,6 +15,7 @@ class KSpigotBasics : JavaPlugin() {
 
 
 	override fun onEnable() {
+		register(CoreListener())
 		KBasicPlayerCache.enable()
 	}
 

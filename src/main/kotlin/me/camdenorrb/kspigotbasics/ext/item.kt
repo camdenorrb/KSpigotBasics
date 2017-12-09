@@ -21,6 +21,11 @@ inline fun ItemStack.mapMeta(block: MapMeta.() -> Unit): ItemStack {
 }
 
 @JvmSynthetic
+fun ItemStack.bookMeta(block: BookMeta.() -> Unit): ItemStack {
+	return meta { block(this as BookMeta) }
+}
+
+@JvmSynthetic
 inline fun ItemStack.skullMeta(block: SkullMeta.() -> Unit): ItemStack {
 	return meta { block(this as SkullMeta) }
 }
@@ -70,6 +75,10 @@ fun ItemStack.meta(consumer: Consumer<ItemMeta>) = meta {
 
 
 fun ItemStack.mapMeta(consumer: Consumer<MapMeta>) = mapMeta {
+	consumer.accept(this)
+}
+
+fun ItemStack.bookMeta(consumer: Consumer<BookMeta>) = bookMeta {
 	consumer.accept(this)
 }
 
