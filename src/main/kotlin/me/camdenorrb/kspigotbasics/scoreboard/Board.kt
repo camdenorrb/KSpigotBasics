@@ -170,6 +170,7 @@ open class Board : Openable<Player> {
 	inner class SideBarBuilder internal constructor(val name: String, val size: Int) {
 
 		var currentIndex = 0
+			private set
 
 
 		val realSize = size - 1

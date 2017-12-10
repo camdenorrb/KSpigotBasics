@@ -3,16 +3,33 @@ package me.camdenorrb.kspigotbasics.ext
 import me.camdenorrb.kspigotbasics.struct.random as rand
 
 
-fun IntArray.random() = this[rand.nextInt(size)]
+fun IntArray.random() =
+	if (size == 1) first()
+	else this[rand.nextInt(size)]
 
-fun LongArray.random() = this[rand.nextInt(size)]
+fun LongArray.random() =
+	if (size == 1) first()
+	else this[rand.nextInt(size)]
 
-fun ByteArray.random() = this[rand.nextInt(size)]
+fun ByteArray.random() =
+	if (size == 1) first()
+	else this[rand.nextInt(size)]
 
 
-fun <T> List<T>.random() = this[rand.nextInt(size)]
+fun <T> List<T>.random() =
+	if (size == 1) first()
+	else this[rand.nextInt(size)]
 
-fun <T> Array<T>.random() = this[rand.nextInt(size)]
+fun <T> Array<T>.random() =
+	if (size == 1) first()
+	else this[rand.nextInt(size)]
+
+fun <T> Set<T>.random() =
+	if (size == 1) first()
+	else elementAt(rand.nextInt(size))
 
 
-fun <T> Collection<T>.random() = take(rand.nextInt(size)).last()
+fun <K, V> Map<K, V>.random(): Map.Entry<K, V> {
+	val entries = this.entries
+	return if (size == 1) entries.first() else entries.random()
+}
