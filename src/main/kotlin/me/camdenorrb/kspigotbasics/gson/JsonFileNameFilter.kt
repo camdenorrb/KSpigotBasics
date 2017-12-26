@@ -6,6 +6,6 @@ import java.io.FilenameFilter
 
 object JsonFileNameFilter : FilenameFilter {
 
-	override fun accept(dir: File, name: String) = name.contains(".json")
+	override fun accept(dir: File?, name: String) = name.contains(".json")
 
 }

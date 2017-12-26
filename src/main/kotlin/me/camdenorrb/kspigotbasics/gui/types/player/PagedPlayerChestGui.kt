@@ -1,4 +1,4 @@
-package me.camdenorrb.kspigotbasics.gui.types
+package me.camdenorrb.kspigotbasics.gui.types.player
 
 import me.camdenorrb.kspigotbasics.gui.Gui
 import org.bukkit.entity.Player

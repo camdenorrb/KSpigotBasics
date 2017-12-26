@@ -3,7 +3,7 @@
 package me.camdenorrb.kspigotbasics.gui.utils
 
 import me.camdenorrb.kspigotbasics.gui.types.ChestGui
-import me.camdenorrb.kspigotbasics.gui.types.PlayerChestGui
+import me.camdenorrb.kspigotbasics.gui.types.player.PlayerChestGui
 import org.bukkit.entity.Player
 import java.util.function.BiConsumer
 import java.util.function.Consumer
@@ -27,11 +27,9 @@ fun playerChestGui(title: String = "", size: Int = 27, block: ChestGui.(Player) 
 
 // For the Java users ;)
 @JvmOverloads
-fun chestGui(title: String = "", size: Int = 27, consumer: Consumer<ChestGui>) = chestGui(title, size) {
-	consumer.accept(this)
-}
+fun chestGui(title: String = "", size: Int = 27, consumer: Consumer<ChestGui>)
+	= chestGui(title, size) { consumer.accept(this) }
 
 @JvmOverloads
-fun playerChestGui(title: String = "", size: Int = 27, consumer: BiConsumer<ChestGui, Player>) = playerChestGui(title, size) {
-	consumer.accept(this, it)
-}
+fun playerChestGui(title: String = "", size: Int = 27, consumer: BiConsumer<ChestGui, Player>)
+	= playerChestGui(title, size) { consumer.accept(this, it) }

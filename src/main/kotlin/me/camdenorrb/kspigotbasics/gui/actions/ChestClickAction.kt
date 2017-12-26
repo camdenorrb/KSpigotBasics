@@ -3,7 +3,7 @@ package me.camdenorrb.kspigotbasics.gui.actions
 import me.camdenorrb.kspigotbasics.gui.Gui
 import me.camdenorrb.kspigotbasics.gui.types.ChestGui
 import me.camdenorrb.kspigotbasics.spigotBasics
-import me.camdenorrb.kspigotbasics.struct.server
+import me.camdenorrb.kspigotbasics.struct.scheduler
 import org.bukkit.Location
 import org.bukkit.entity.Player
 import org.bukkit.event.Event
@@ -11,7 +11,7 @@ import org.bukkit.event.inventory.InventoryClickEvent
 import org.bukkit.inventory.Inventory
 
 
-class ChestClickAction(val chestGui: ChestGui, val clickEvent: InventoryClickEvent) {
+class ChestClickAction(val clickedGui: ChestGui, val clickEvent: InventoryClickEvent) {
 
 	var isCancelled: Boolean
 		get() = clickEvent.isCancelled
@@ -52,21 +52,21 @@ class ChestClickAction(val chestGui: ChestGui, val clickEvent: InventoryClickEve
 
 	// Safety precautions, as stated in the InventoryClickEvent JavaDocs.
 
-	fun switchGui(gui: Gui) = server.scheduler.runTask(spigotBasics) {
+	fun switchGui(gui: Gui) = scheduler.runTask(spigotBasics) {
 		gui.open(whoClicked)
 	}!!
 
-	fun closeGui() = server.scheduler.runTask(spigotBasics) {
+	fun closeGui() = scheduler.runTask(spigotBasics) {
 		whoClicked.closeInventory()
 	}!!
 
-	fun switchInventory(inventory: Inventory) = server.scheduler.runTask(spigotBasics) {
+	fun switchInventory(inventory: Inventory) = scheduler.runTask(spigotBasics) {
 		whoClicked.openInventory(inventory)
 	}!!
 
 
 	@JvmOverloads
-	fun openWorkbench(location: Location, force: Boolean = false) = server.scheduler.runTask(spigotBasics) {
+	fun openWorkbench(location: Location, force: Boolean = false) = scheduler.runTask(spigotBasics) {
 		whoClicked.openWorkbench(location, force)
 	}!!
 

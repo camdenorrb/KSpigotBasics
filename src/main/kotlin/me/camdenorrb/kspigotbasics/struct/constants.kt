@@ -11,10 +11,13 @@ import org.bukkit.Location
 import org.bukkit.Server
 import org.bukkit.plugin.PluginManager
 import org.bukkit.plugin.messaging.Messenger
+import org.bukkit.scheduler.BukkitScheduler
 import java.util.concurrent.ThreadLocalRandom
 
 
 val server: Server = Bukkit.getServer()
+
+val scheduler: BukkitScheduler = server.scheduler
 
 
 val bungeeMessenger: Messenger = server.messenger
