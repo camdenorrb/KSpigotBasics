@@ -21,6 +21,10 @@ inline fun File.readOrCreate(read: FileReader.() -> Unit) {
 }
 
 
+fun File.safeCreate() {
+	if (!exists()) this.parentFile?.mkdirs().also { createNewFile() }
+}
+
 fun File.create() {
 	check(this.exists().not(), { "The file you tried to create already exists" })
 	this.parentFile?.mkdirs().also { createNewFile() }

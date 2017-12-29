@@ -3,7 +3,7 @@ package me.camdenorrb.kspigotbasics.gui.types
 import me.camdenorrb.kspigotbasics.gui.Gui
 import me.camdenorrb.kspigotbasics.gui.actions.ChestClickAction
 import me.camdenorrb.kspigotbasics.gui.slot.ChestSlot
-import me.camdenorrb.kspigotbasics.struct.ChestClickBlock
+import me.camdenorrb.kspigotbasics.struct.ChestClickLambda
 import me.camdenorrb.kspigotbasics.struct.server
 import me.camdenorrb.kspigotbasics.types.modules.ListeningModule
 import org.bukkit.Material
@@ -22,7 +22,7 @@ abstract class ChestGui(title: String, size: Int = 27): ListeningModule(), Gui {
 	val inventory = server.createInventory(null, size, title)!!
 
 
-	var defaultAction: ChestClickBlock = {}
+	var defaultAction: ChestClickLambda = {}
 
 
 	protected open fun construct() = Unit
