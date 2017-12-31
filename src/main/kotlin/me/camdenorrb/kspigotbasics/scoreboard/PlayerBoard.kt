@@ -1,7 +1,7 @@
 package me.camdenorrb.kspigotbasics.scoreboard
 
-import me.camdenorrb.kspigotbasics.spigotBasics
 import me.camdenorrb.kspigotbasics.struct.server
+import me.camdenorrb.kspigotbasics.struct.spigotBasics
 import me.camdenorrb.kspigotbasics.types.modules.ListeningModule
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler

@@ -1,8 +1,8 @@
 package me.camdenorrb.kspigotbasics.types.modules
 
-import me.camdenorrb.kspigotbasics.spigotBasics
 import me.camdenorrb.kspigotbasics.struct.miniBus
 import me.camdenorrb.kspigotbasics.struct.server
+import me.camdenorrb.kspigotbasics.struct.spigotBasics
 import me.camdenorrb.minibus.listener.MiniListener
 import org.bukkit.event.HandlerList
 import org.bukkit.event.Listener

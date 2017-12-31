@@ -1,3 +1,5 @@
+@file:JvmName("RandomExt")
+
 package me.camdenorrb.kspigotbasics.ext
 
 import me.camdenorrb.kspigotbasics.struct.random as rand

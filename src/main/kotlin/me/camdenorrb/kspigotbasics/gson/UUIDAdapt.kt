@@ -1,7 +1,6 @@
 package me.camdenorrb.kspigotbasics.gson
 
 import com.google.gson.*
-import org.bukkit.Location
 import java.lang.reflect.Type
 import java.util.*
 

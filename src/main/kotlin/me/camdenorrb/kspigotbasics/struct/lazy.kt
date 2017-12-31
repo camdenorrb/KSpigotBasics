@@ -3,16 +3,22 @@
 
 package me.camdenorrb.kspigotbasics.struct
 
+import me.camdenorrb.kspigotbasics.KSpigotBasics
 import me.camdenorrb.kspigotbasics.utils.nmsClass
 import me.camdenorrb.minibus.MiniBus
+import org.bukkit.World
 
 
 val miniBus by lazy { MiniBus() }
 
-val mainWorld by lazy { server.worlds.first() }
+val spigotBasics by lazy { KSpigotBasics.instance }
+
+
+val mainWorld: World by lazy { server.worlds.first() }
 
 
 // NMS Reflection
+// TODO: Make a Reflection object which automagically caches results
 
 internal val enumTitleActionClass by lazy {
 	try { nmsClass("PacketPlayOutTitle\$EnumTitleAction") }

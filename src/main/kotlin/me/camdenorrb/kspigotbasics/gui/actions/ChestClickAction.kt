@@ -2,8 +2,8 @@ package me.camdenorrb.kspigotbasics.gui.actions
 
 import me.camdenorrb.kspigotbasics.gui.Gui
 import me.camdenorrb.kspigotbasics.gui.types.ChestGui
-import me.camdenorrb.kspigotbasics.spigotBasics
 import me.camdenorrb.kspigotbasics.struct.scheduler
+import me.camdenorrb.kspigotbasics.struct.spigotBasics
 import org.bukkit.Location
 import org.bukkit.entity.Player
 import org.bukkit.event.Event

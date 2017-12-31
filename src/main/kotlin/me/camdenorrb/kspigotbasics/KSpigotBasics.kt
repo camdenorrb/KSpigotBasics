@@ -1,27 +1,36 @@
 package me.camdenorrb.kspigotbasics
 
+import me.camdenorrb.kspigotbasics.cache.DisguiseCache
 import me.camdenorrb.kspigotbasics.cache.KBasicPlayerCache
+import me.camdenorrb.kspigotbasics.cache.ReflectCache
 import me.camdenorrb.kspigotbasics.ext.register
 import me.camdenorrb.kspigotbasics.listeners.CoreListener
 import me.camdenorrb.kspigotbasics.struct.miniBus
 import org.bukkit.plugin.java.JavaPlugin
 
 
-lateinit var spigotBasics: KSpigotBasics private set
-
 class KSpigotBasics : JavaPlugin() {
 
-	override fun onLoad() { spigotBasics = this }
-
+	override fun onLoad() { instance = this }
 
 	override fun onEnable() {
 		register(CoreListener())
-		KBasicPlayerCache.enable()
+		modules.forEach { it.enable() }
 	}
 
 	override fun onDisable() {
 		miniBus.cleanUp()
-		KBasicPlayerCache.disable()
+		modules.forEach { it.disable() }
+	}
+
+
+	companion object {
+
+		val modules = arrayOf(ReflectCache, DisguiseCache, KBasicPlayerCache)
+
+		lateinit var instance: KSpigotBasics
+			private set
+
 	}
 
 }

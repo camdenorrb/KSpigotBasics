@@ -3,8 +3,8 @@
 
 package me.camdenorrb.kspigotbasics.utils
 
-import me.camdenorrb.kspigotbasics.spigotBasics
 import me.camdenorrb.kspigotbasics.struct.pluginManager
+import me.camdenorrb.kspigotbasics.struct.spigotBasics
 import org.bukkit.event.Event
 import org.bukkit.event.EventPriority
 import org.bukkit.event.EventPriority.NORMAL

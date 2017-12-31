@@ -1,3 +1,5 @@
+@file:JvmName("BlockFaceExt")
+
 package me.camdenorrb.kspigotbasics.ext
 
 import org.bukkit.block.BlockFace
