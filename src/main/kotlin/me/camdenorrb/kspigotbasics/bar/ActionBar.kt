@@ -18,6 +18,7 @@ private val gameInfoType by lazy {
 
 data class ActionBar(val text: String) {
 
+
 	fun send(player: Player) {
 
 		val serializer = chatSerializerAMethod.invoke(null, """{"text": "$text"}""")
@@ -31,6 +32,7 @@ data class ActionBar(val text: String) {
 	}
 
 	fun sendAll() {
+
 
 		val serializer = chatSerializerAMethod.invoke(null, """{"text": "$text"}""")
 		val version = server.bukkitVersion

@@ -15,13 +15,13 @@ abstract class ListeningModule : ModuleImpl(), Listener, MiniListener {
 	protected open fun onStop() = Unit
 
 
-	override final fun onEnable() {
+	final override fun onEnable() {
 		onStart()
 		miniBus.register(this)
 		server.pluginManager.registerEvents(this, spigotBasics)
 	}
 
-	override final fun onDisable() {
+	final override fun onDisable() {
 		onStop()
 		miniBus.unregister(this)
 		HandlerList.unregisterAll(this)

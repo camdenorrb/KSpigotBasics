@@ -1,6 +1,5 @@
 package me.camdenorrb.kspigotbasics
 
-import me.camdenorrb.kspigotbasics.cache.DisguiseCache
 import me.camdenorrb.kspigotbasics.cache.KBasicPlayerCache
 import me.camdenorrb.kspigotbasics.cache.ReflectCache
 import me.camdenorrb.kspigotbasics.ext.register
@@ -26,7 +25,7 @@ class KSpigotBasics : JavaPlugin() {
 
 	companion object {
 
-		val modules = arrayOf(ReflectCache, DisguiseCache, KBasicPlayerCache)
+		val modules = arrayOf(ReflectCache, KBasicPlayerCache) //DisguiseCache
 
 		lateinit var instance: KSpigotBasics
 			private set

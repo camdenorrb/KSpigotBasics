@@ -1,21 +1,22 @@
 package me.camdenorrb.kspigotbasics.cache
 
-import me.camdenorrb.kspigotbasics.cache.ReflectCache.retrieveClass
 import me.camdenorrb.kspigotbasics.cache.ReflectCache.retrieveConstructor
+import me.camdenorrb.kspigotbasics.cache.ReflectCache.retrieveField
 import me.camdenorrb.kspigotbasics.cache.ReflectCache.retrieveMethod
+import me.camdenorrb.kspigotbasics.struct.dataWatcherSetMethod
 import me.camdenorrb.kspigotbasics.struct.server
 import me.camdenorrb.kspigotbasics.types.modules.ListeningModule
-import me.camdenorrb.kspigotbasics.utils.craftClass
-import net.minecraft.server.v1_12_R1.Entity
+import me.camdenorrb.kspigotbasics.utils.nmsClass
 import org.bukkit.EntityEffect.HURT
 import org.bukkit.entity.LivingEntity
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.block.Action.RIGHT_CLICK_AIR
 import org.bukkit.event.block.Action.RIGHT_CLICK_BLOCK
-import org.bukkit.event.entity.EntityDamageByBlockEvent
-import org.bukkit.event.entity.EntityDamageByEntityEvent
-import org.bukkit.event.entity.EntityShootBowEvent
+import org.bukkit.event.entity.*
+import org.bukkit.event.entity.EntityDamageEvent.DamageCause.*
+import org.bukkit.event.inventory.InventoryClickEvent
+import org.bukkit.event.inventory.InventoryType.SlotType.ARMOR
 import org.bukkit.event.player.*
 import org.bukkit.event.player.PlayerAnimationType.ARM_SWING
 
@@ -40,6 +41,25 @@ object DisguiseCache : ListeningModule() {
 	}
 
 	@EventHandler(ignoreCancelled = true)
+	fun onEquip(event: InventoryClickEvent) {
+
+		if (event.slotType != ARMOR) return
+
+		val player = event.clickedInventory.holder as? Player ?: return
+
+		val playerEquipment = player.equipment
+		val disguiseEquipment = disguiseMap[player]?.equipment ?: return
+
+		when(event.slot) {
+			103 -> disguiseEquipment.helmet = playerEquipment.helmet
+			102 -> disguiseEquipment.chestplate = playerEquipment.chestplate
+			101 -> disguiseEquipment.leggings = playerEquipment.leggings
+			100 -> disguiseEquipment.boots = playerEquipment.boots
+		}
+
+	}
+
+	@EventHandler(ignoreCancelled = true)
 	fun onMove(event: PlayerMoveEvent) {
 		val disguise = disguiseMap[event.player] ?: return
 		disguise.teleport(event.to)
@@ -48,19 +68,39 @@ object DisguiseCache : ListeningModule() {
 	@EventHandler(ignoreCancelled = true)
 	fun onScroll(event: PlayerItemHeldEvent) {
 		val disguise = disguiseMap[event.player] ?: return
-		disguise.equipment.itemInMainHand = event.player.equipment.itemInMainHand
+		disguise.equipment.itemInMainHand = event.player.inventory.getItem(event.newSlot)
 	}
 
 	@EventHandler(ignoreCancelled = true)
-	fun onDmgFromBlock(event: EntityDamageByBlockEvent) {
+	fun onCombust(event: EntityCombustEvent) {
 
 		val entity = event.entity
+		if (entity is Player) { disguiseMap[entity]?.fireTicks = entity.fireTicks; return }
+
+		if (event is EntityCombustByEntityEvent || event is EntityCombustByBlockEvent) return
+
+		val player = disguiseMap.entries.find { it.value == entity }?.key ?: return
+		if (player.fireTicks <= 0) event.isCancelled = true
+	}
+
+	@EventHandler(ignoreCancelled = true)
+	fun onDmg(event: EntityDamageEvent) {
+
+		val cause = event.cause
+		if (cause == ENTITY_ATTACK || cause == ENTITY_EXPLOSION || cause == ENTITY_SWEEP_ATTACK) return
+
+		val entity = event.entity.takeIf { it !is Player } ?: return
 		val player = disguiseMap.entries.find { it.value == entity }?.key ?: return
 
-		event.isCancelled = true
+		val damageCache = event.damage
+		event.damage = 0.0
 
-		player.damage(event.damage)
+		if (cause == DROWNING) return
+
 		entity.playEffect(HURT)
+		if (cause == FIRE_TICK) return
+
+		player.damage(damageCache)
 	}
 
 	@EventHandler(ignoreCancelled = true)
@@ -69,10 +109,9 @@ object DisguiseCache : ListeningModule() {
 		val entity = event.entity
 		val player = disguiseMap.entries.find { it.value == entity }?.key ?: return
 
-		event.isCancelled = true
-
 		player.damage(event.damage, event.damager)
-		entity.playEffect(HURT)
+
+		event.damage = 0.0
 	}
 
 	@EventHandler(ignoreCancelled = true)
@@ -82,21 +121,27 @@ object DisguiseCache : ListeningModule() {
 
 		val disguise = disguiseMap[event.player] ?: return
 
-		val handle = retrieveMethod(craftClass("entity.CraftEntity"), "getHandle").invoke(disguise)
-		val packetConstructor = retrieveConstructor(retrieveClass("PacketPlayOutAnimation"), Entity::class.java, Int::class.java)
+		val handle = retrieveMethod(disguise.javaClass, "getHandle").invoke(disguise)
+		val packetConstructor = retrieveConstructor(nmsClass("PacketPlayOutAnimation"), nmsClass("Entity"), Int::class.java)
 
 		val packet = packetConstructor.newInstance(handle, 0)
 		KBasicPlayerCache.basicPlayers.values.forEach { it.sendPacket(packet) }
 	}
 
 
+	/* Not supported in 1.8
+
 	@EventHandler(ignoreCancelled = true)
 	fun onHandItemSwap(event: PlayerSwapHandItemsEvent) {
 		val disguiseEquipment = disguiseMap[event.player]?.equipment ?: return
 		disguiseEquipment.itemInMainHand = event.mainHandItem
 		disguiseEquipment.itemInOffHand = event.offHandItem
-	}
+	}*/
 
+	/*
+	[21:07] <md_5> http://wiki.vg/Entity_metadata#Living
+	[21:07] <md_5> is hand active
+	 */
 	@EventHandler(ignoreCancelled = true)
 	fun onDraw(event: PlayerInteractEvent) {
 
@@ -105,12 +150,25 @@ object DisguiseCache : ListeningModule() {
 
 		val disguise = disguiseMap[event.player] ?: return
 
-		val handle = retrieveMethod(craftClass("entity.CraftEntity"), "getHandle").invoke(disguise)
+		val handle = retrieveMethod(disguise.javaClass, "getHandle").invoke(disguise)
 		val handleClass = handle.javaClass
 
-		if (handleClass.interfaces.none { it.simpleName == "IRangedEntity" }) return
+		if (!nmsClass("IRangedEntity").isAssignableFrom(handleClass)) return
 
-		retrieveMethod(handleClass, "p", Boolean::class.java).invoke(handle, true)
+		val dataWatcher = retrieveField(nmsClass("Entity"), "datawatcher").apply { isAccessible = true }.get(handle)
+
+		when(dataWatcherSetMethod.name) {
+
+			"set" -> {
+				dataWatcherSetMethod.invoke(dataWatcher, retrieveField(handleClass.superclass, "a").apply { isAccessible = true }.get(handle), true)
+			}
+
+			"watch" -> {
+				dataWatcherSetMethod.invoke(dataWatcher, 13, (1).toByte())
+			}
+
+		}
+
 	}
 
 	@EventHandler(ignoreCancelled = true)
@@ -118,12 +176,25 @@ object DisguiseCache : ListeningModule() {
 
 		val disguise = disguiseMap[event.entity] ?: return
 
-		val handle = retrieveMethod(craftClass("entity.CraftEntity"), "getHandle").invoke(disguise)
+		val handle = retrieveMethod(disguise.javaClass, "getHandle").invoke(disguise)
 		val handleClass = handle.javaClass
 
-		if (handleClass.interfaces.none { it.simpleName == "IRangedEntity" }) return
+		if (!nmsClass("IRangedEntity").isAssignableFrom(handleClass)) return
 
-		retrieveMethod(handleClass, "p", Boolean::class.java).invoke(handle, false)
+		val dataWatcher = retrieveField(nmsClass("Entity"), "datawatcher").apply { isAccessible = true }.get(handle)
+
+		when (dataWatcherSetMethod.name) {
+
+			"set" -> {
+				dataWatcherSetMethod.invoke(dataWatcher, retrieveField(handleClass.superclass, "a").apply { isAccessible = true }.get(handle), false)
+			}
+
+			"watch" -> {
+				dataWatcherSetMethod.invoke(dataWatcher, 13, (0).toByte())
+			}
+
+		}
+
 	}
 
 	/*@EventHandler(ignoreCancelled = true)
@@ -137,7 +208,7 @@ object DisguiseCache : ListeningModule() {
 		val disguise = disguiseMap[event.player] ?: return
 		if (!disguise.isDead) disguise.damage(disguise.health)
 		CraftSkeleton
-		// TODO: Respawn Disguise and put into map
+		// TODO: Respawn IDisguise and put into map
 	}*/
 
 }

@@ -12,7 +12,7 @@ abstract class ModuleImpl : Module {
 	protected open fun onDisable() = Unit
 
 
-	override final fun enable() {
+	final override fun enable() {
 
 		if (isEnabled) return
 
@@ -20,7 +20,7 @@ abstract class ModuleImpl : Module {
 		isEnabled = true
 	}
 
-	override final fun disable() {
+	final override fun disable() {
 
 		if (!isEnabled) return
 

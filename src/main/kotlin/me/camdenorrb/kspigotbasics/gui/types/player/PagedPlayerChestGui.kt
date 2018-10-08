@@ -10,6 +10,8 @@ class PagedPlayerChestGui : Gui {
 
 	}
 
+	override fun close(target: Player) {
 
+	}
 
 }

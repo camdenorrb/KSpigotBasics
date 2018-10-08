@@ -32,10 +32,10 @@ fun JavaPlugin.register(vararg cmds: Pair<String, CommandExecutor>) = cmds.forEa
 }
 
 
-fun JavaPlugin.registerOutBungeeChannel(vararg channels: String) = channels.forEach {
+fun JavaPlugin.registerOutPluginChannel(vararg channels: String) = channels.forEach {
 	bungeeMessenger.registerOutgoingPluginChannel(this, it)
 }
 
-fun JavaPlugin.registerInBungeeChannel(channel: String, listener: PluginMessageListener) {
+fun JavaPlugin.registerInPluginChannel(channel: String, listener: PluginMessageListener) {
 	bungeeMessenger.registerIncomingPluginChannel(this, channel, listener)
 }

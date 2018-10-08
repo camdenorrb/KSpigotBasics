@@ -26,6 +26,8 @@ class ChestClickAction(val clickedGui: ChestGui, val clickEvent: InventoryClickE
 
 	val rawSlot by lazy { clickEvent.rawSlot }
 
+	val clicked by lazy { clickEvent.currentItem }
+
 
 	val isLeftClick by lazy { clickEvent.isLeftClick }
 

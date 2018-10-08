@@ -5,21 +5,31 @@ import me.camdenorrb.kspigotbasics.struct.RESET
 import me.camdenorrb.kspigotbasics.struct.server
 import me.camdenorrb.kspigotbasics.types.Openable
 import me.camdenorrb.kspigotbasics.utils.listen
+import me.camdenorrb.kspigotbasics.utils.playerListen
+import org.bukkit.Bukkit
 import org.bukkit.ChatColor
 import org.bukkit.entity.Player
 import org.bukkit.event.Event
 import org.bukkit.event.HandlerList
 import org.bukkit.event.Listener
+import org.bukkit.event.player.PlayerEvent
 import org.bukkit.scoreboard.DisplaySlot
 import org.bukkit.scoreboard.Objective
+import org.bukkit.scoreboard.Scoreboard
 import org.bukkit.scoreboard.Team
+import java.util.*
 import java.util.function.Consumer
 
 
 // TODO: Make a inlined scoreboard, which will attribute to the player's current scoreboard or make a new one if main.
 open class Board : Openable<Player> {
 
-	val scoreboard = server.scoreboardManager.newScoreboard!!
+	val viewers = mutableListOf<UUID>()
+
+	var onOpenBlock: (Player) -> Unit = {}
+	var onCloseBlock: (Player) -> Unit = {}
+
+	internal val scoreboard = server.scoreboardManager.newScoreboard!!
 
 
 	var sideBar: SideBar? = null
@@ -27,10 +37,10 @@ open class Board : Openable<Player> {
 
 
 	val teams: MutableSet<Team>
-		inline get() = scoreboard.teams
+		get() = scoreboard.teams
 
 	val objectives: MutableSet<Objective>
-		inline get() = scoreboard.objectives
+		get() = scoreboard.objectives
 
 
 	operator fun get(objName: String): Objective? = scoreboard.getObjective(objName)
@@ -38,7 +48,26 @@ open class Board : Openable<Player> {
 	operator fun get(displaySlot: DisplaySlot): Objective? = scoreboard.getObjective(displaySlot)
 
 
-	override fun open(target: Player) { target.scoreboard = scoreboard }
+	override fun open(target: Player) {
+		onOpen(target); onOpenBlock(target)
+		viewers += target.uniqueId
+		target.scoreboard = scoreboard
+	}
+
+	override fun close(target: Player) {
+		close(target, Bukkit.getScoreboardManager().mainScoreboard)
+	}
+
+	fun close(target: Player, newBoard: Scoreboard) {
+		onClose(target); onCloseBlock(target)
+		viewers -= target.uniqueId
+		target.scoreboard = newBoard
+	}
+
+
+	fun onOpen(target: Player) = Unit
+
+	fun onClose(target: Player) = Unit
 
 
 	fun findTeam(player: Player): Team? {
@@ -55,8 +84,8 @@ open class Board : Openable<Player> {
 	}
 
 	@JvmSynthetic
-	fun createTeam(name: String, build: Team.() -> Unit) {
-		createTeam(name).also(build)
+	fun createTeam(name: String, build: Team.() -> Unit): Team {
+		return createTeam(name).also(build)
 	}
 
 
@@ -89,13 +118,13 @@ open class Board : Openable<Player> {
 	}
 
 	@JvmOverloads
-	fun createObj(name: String, criteria: String = "dummy", consumer: Consumer<Objective>) = createObj(name, criteria) {
+	@JvmName("createObj")
+	fun jCreateObj(name: String, criteria: String = "dummy", consumer: Consumer<Objective>) = createObj(name, criteria) {
 		consumer.accept(this)
 	}
 
 
 	inner class SideBar internal constructor(val name: String) {
-
 
 		private lateinit var sideTeams: List<Team>
 
@@ -159,7 +188,7 @@ open class Board : Openable<Player> {
 
 			val team = sideTeams[index]
 			team.prefix = value.substring(0 until length.coerceAtMost(16))
-			team.suffix = if (length > 16) "${ChatColor.getLastColors(team.prefix)}${value.substring(16, length.coerceAtMost(32))}" else ""
+			team.suffix = if (length > 16) "${ChatColor.getLastColors(team.prefix)}${value.substring(16 until length.coerceAtMost(32))}" else ""
 
 			objective.getScore("${team.name}$RESET").score = index
 		}
@@ -218,6 +247,22 @@ open class Board : Openable<Player> {
 
 		}
 
+
+		@JvmSynthetic
+		inline fun <reified E : PlayerEvent> playerListeningText(player: Player, initial: String = "", noinline block: E.() -> String) {
+
+			check(currentIndex in 0..realSize) { "Tried to add a entry out of range!" }
+
+			val textIndex = realSize - currentIndex
+
+			text(initial)
+
+			sideBar.listeners += playerListen<E>(player) {
+				if (!sideBar.isRegistered) HandlerList.unregisterAll(this)
+				sideBar[textIndex] = block(it)
+			}
+
+		}
 
 	}
 

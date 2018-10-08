@@ -6,6 +6,8 @@ import org.bukkit.entity.Player
 
 interface Gui : Openable<Player> {
 
-	override fun open(target: Player) = Unit
+	override fun close(target: Player) {
+		target.closeInventory()
+	}
 
 }
