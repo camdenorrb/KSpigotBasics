@@ -16,7 +16,8 @@ fun Player.disguise(entityType: EntityType) {
 	check(entityType.isAlive) { "Tried to disguise as a non-living entity!" }
 
 	val disguise = world.spawnEntity(location, entityType) as LivingEntity
-	DisguiseCache.disguiseMap.put(player, disguise)
+	disguise.setAI(false)
 
+	DisguiseCache.disguiseMap[player] = disguise
 	server.onlinePlayers.forEach { it.hidePlayer(this) }
 }

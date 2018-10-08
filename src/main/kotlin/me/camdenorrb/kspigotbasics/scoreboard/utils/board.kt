@@ -4,8 +4,8 @@ package me.camdenorrb.kspigotbasics.scoreboard.utils
 
 import me.camdenorrb.kspigotbasics.scoreboard.Board
 import me.camdenorrb.kspigotbasics.scoreboard.PlayerBoard
+import me.camdenorrb.kspigotbasics.scoreboard.PlayerBoards
 import org.bukkit.entity.Player
-import java.util.function.BiConsumer
 import java.util.function.Consumer
 
 
@@ -13,11 +13,11 @@ import java.util.function.Consumer
 fun board(block: Board.() -> Unit) = Board().also(block)
 
 @JvmSynthetic
-fun playerBoard(construct: Board.(Player) -> Unit): PlayerBoard {
+fun playerBoards(construct: PlayerBoard.(Player) -> Unit): PlayerBoards {
 
-	val board = object : PlayerBoard() {
+	val board = object : PlayerBoards() {
 
-		override fun Board.onConstruct(player: Player) = construct(this, player)
+		override fun PlayerBoard.onConstruct() = construct(this, player)
 
 	}
 
@@ -28,10 +28,12 @@ fun playerBoard(construct: Board.(Player) -> Unit): PlayerBoard {
 
 // For the Java users ;)
 
-fun board(consumer: Consumer<Board>) = board {
+@JvmName("board")
+fun jBoard(consumer: Consumer<Board>) = board {
 	consumer.accept(this)
 }
 
-fun playerBoard(consumer: BiConsumer<Board, Player>) = playerBoard {
-	consumer.accept(this, it)
+@JvmName("playerBoards")
+fun jPlayerBoards(consumer: Consumer<PlayerBoard>) = playerBoards {
+	consumer.accept(this)
 }

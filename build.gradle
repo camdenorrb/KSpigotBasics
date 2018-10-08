@@ -4,10 +4,10 @@ version '1.0.2'
 buildscript {
 
 	ext {
-		dokkaVersion = '0.9.15'
-		shadowVersion = '2.0.1'
-		kotlinVersion = '1.2.10'
-		coroutineVersion = '0.20'
+		dokkaVersion = '0.9.17'
+		shadowVersion = '2.0.4'
+		kotlinVersion = '1.2.71'
+		coroutineVersion = '0.30.1'
 		spigotVersion = '1.12.2-R0.1-SNAPSHOT'
     }
 
@@ -42,21 +42,27 @@ dependencies {
 
 	compileOnly "org.spigotmc:spigot:$spigotVersion"
 
-	compile "com.sxtanna.db:Kuery:+"
-	compile "com.sxtanna.database:Kedis:+"
+	compile "com.sxtanna.db:Kuery:1.5"
+	compile "com.sxtanna.database:Kedis:1.1"
 
 	compile "me.camdenorrb:MiniBus:1.2.3"
 	compile "com.okkero.skedule:skedule:1.2.3"
 
 	compile "org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion"
 	compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
-	compile "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutineVersion"
+
+	//https://github.com/Kotlin/kotlinx.coroutines/issues/659
+	compile("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutineVersion") {
+		exclude group: "org.jetbrains.kotlinx", module: "atomicfu-common"
+	}
+
+	//compile "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutineVersion"
 }
 
 
 dokka {
-	outputFormat = 'html'
-	outputDirectory = "$buildDir/javadoc"
+	outputFormat = 'javadoc'
+	outputDirectory = "$buildDir/docs"
 }
 
 
@@ -67,3 +73,4 @@ compileKotlin {
 compileTestKotlin {
     kotlinOptions.jvmTarget = "1.8"
 }
+

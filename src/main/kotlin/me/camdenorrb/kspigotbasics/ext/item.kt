@@ -21,7 +21,7 @@ inline fun ItemStack.mapMeta(block: MapMeta.() -> Unit): ItemStack {
 }
 
 @JvmSynthetic
-fun ItemStack.bookMeta(block: BookMeta.() -> Unit): ItemStack {
+inline fun ItemStack.bookMeta(block: BookMeta.() -> Unit): ItemStack {
 	return meta { block(this as BookMeta) }
 }
 

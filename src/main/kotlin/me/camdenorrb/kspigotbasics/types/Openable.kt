@@ -5,4 +5,6 @@ interface Openable<in T : Any> {
 
 	fun open(target: T)
 
+	fun close(target: T)
+
 }

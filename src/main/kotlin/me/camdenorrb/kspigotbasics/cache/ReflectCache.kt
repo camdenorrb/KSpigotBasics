@@ -28,22 +28,22 @@ object ReflectCache : ModuleImpl() {
 
 	fun retrieveClass(path: String) : Class<*> {
 		val foundClass = cachedClasses[path]
-		return foundClass ?: Class.forName(path).also { cachedClasses.put(path, it) }
+		return foundClass ?: Class.forName(path).also { cachedClasses[path] = it }
 	}
 
 	fun <T> retrieveField(clazz: Class<T>, name: String): Field {
 		val foundField = cachedFields[clazz]?.find { it.name == name }
-		return foundField ?: clazz.getField(name).also { cachedFields.getOrPut(clazz, { mutableSetOf() }).add(it) }
+		return foundField ?: clazz.getDeclaredField(name).also { cachedFields.getOrPut(clazz, { mutableSetOf() }).add(it) }
 	}
 
 	fun <T> retrieveMethod(clazz: Class<T>, name: String, vararg paramTypes: Class<*>): Method {
-		val foundMethod = cachedMethods[clazz]?.find { it.name == name && it.parameters.contentEquals(paramTypes) }
-		return foundMethod ?: clazz.getMethod(name, *paramTypes)
+		val foundMethod = cachedMethods[clazz]?.find { it.name == name && it.parameters!!.contentEquals(paramTypes) }
+		return foundMethod ?: clazz.getDeclaredMethod(name, *paramTypes)
 	}
 
 	fun <T> retrieveConstructor(clazz: Class<T>, vararg paramTypes: Class<*>): Constructor<T> {
-		val foundConstructor = cachedConstructors[clazz]?.find { it.parameters.contentEquals(paramTypes) }
-		return foundConstructor as? Constructor<T> ?: clazz.getConstructor(*paramTypes)
+		val foundConstructor = cachedConstructors[clazz]?.find { it.parameters!!.contentEquals(paramTypes) }
+		return foundConstructor as? Constructor<T> ?: clazz.getDeclaredConstructor(*paramTypes)
 	}
 
 }

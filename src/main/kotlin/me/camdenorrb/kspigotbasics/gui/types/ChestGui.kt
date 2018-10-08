@@ -51,7 +51,8 @@ abstract class ChestGui(title: String, size: Int = 27): ListeningModule(), Gui {
 	}
 
 
-	fun setDefaultAction(consumer: Consumer<ChestClickAction>) {
+	@JvmName("setDefaultAction")
+	fun setJDefaultAction(consumer: Consumer<ChestClickAction>) {
 		defaultAction = { consumer.accept(this) }
 	}
 
