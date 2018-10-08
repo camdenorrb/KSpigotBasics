@@ -62,7 +62,7 @@ dependencies {
 
 dokka {
 	outputFormat = 'javadoc'
-	outputDirectory = "$buildDir/docs"
+	outputDirectory = "docs"
 }
 
 
