@@ -1,5 +1,6 @@
 package me.camdenorrb.kspigotbasics.cache
 
+/*
 import me.camdenorrb.kspigotbasics.cache.ReflectCache.retrieveConstructor
 import me.camdenorrb.kspigotbasics.cache.ReflectCache.retrieveField
 import me.camdenorrb.kspigotbasics.cache.ReflectCache.retrieveMethod
@@ -211,4 +212,4 @@ object DisguiseCache : ListeningModule() {
 		// TODO: Respawn IDisguise and put into map
 	}*/
 
-}
+}*/

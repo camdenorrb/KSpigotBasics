@@ -1,5 +1,6 @@
 package me.camdenorrb.kspigotbasics.disguise
 
+/*
 import org.bukkit.Location
 import org.bukkit.entity.EntityType
 import org.bukkit.entity.LivingEntity
@@ -38,4 +39,4 @@ class LivingDisguise(val entityType: EntityType) : IDisguise {
 	}
 
 
-}
+}*/

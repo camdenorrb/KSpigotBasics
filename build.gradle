@@ -4,7 +4,7 @@ version '1.0.2'
 buildscript {
 
 	ext {
-		spigotVersion = '1.12.2-R0.1-SNAPSHOT'
+		spigotVersion = '1.8.8-R0.1-SNAPSHOT'
     }
 
     repositories {

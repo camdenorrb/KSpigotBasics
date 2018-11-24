@@ -2,15 +2,14 @@
 
 package me.camdenorrb.kspigotbasics.ext
 
-import me.camdenorrb.kspigotbasics.cache.DisguiseCache
+//import me.camdenorrb.kspigotbasics.cache.DisguiseCache
 import me.camdenorrb.kspigotbasics.cache.KBasicPlayerCache
-import org.bukkit.entity.EntityType
-import org.bukkit.entity.LivingEntity
 import org.bukkit.entity.Player
 
 
 fun Player.kBasic() = KBasicPlayerCache.basicPlayers[this]!!
 
+/*
 fun Player.disguise(entityType: EntityType) {
 
 	check(entityType.isAlive) { "Tried to disguise as a non-living entity!" }
@@ -20,4 +19,4 @@ fun Player.disguise(entityType: EntityType) {
 
 	DisguiseCache.disguiseMap[player] = disguise
 	server.onlinePlayers.forEach { it.hidePlayer(this) }
-}
+}*/

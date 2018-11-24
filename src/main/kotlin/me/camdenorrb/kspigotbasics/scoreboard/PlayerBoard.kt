@@ -47,7 +47,8 @@ abstract class PlayerBoards : ListeningModule(), (Player) -> Unit {
 
 	final override fun onStop() {
 
-		if (!this::cleanUpTask.isInitialized || cleanUpTask.isCancelled) return
+		// NOTE: Commented out for version support
+		if (!this::cleanUpTask.isInitialized/*|| cleanUpTask.isCancelled*/) return
 
 		onPoison()
 

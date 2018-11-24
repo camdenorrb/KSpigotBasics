@@ -4,7 +4,7 @@ package me.camdenorrb.kspigotbasics.chat.utils
 
 import net.md_5.bungee.api.chat.BaseComponent
 import net.md_5.bungee.api.chat.TextComponent
-import org.bukkit.util.Consumer
+import java.util.function.Consumer
 
 
 inline fun textComp(text: String = "", block: TextComponent.() -> Unit = {}): TextComponent {

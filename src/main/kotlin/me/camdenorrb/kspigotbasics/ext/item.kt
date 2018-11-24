@@ -40,20 +40,24 @@ inline fun ItemStack.fireWorkMeta(block: FireworkMeta.() -> Unit): ItemStack {
 	return meta { block(this as FireworkMeta) }
 }
 
+/*
 @JvmSynthetic
 inline fun ItemStack.spawnEggMeta(block: SpawnEggMeta.() -> Unit): ItemStack {
 	return meta { block(this as SpawnEggMeta) }
 }
+*/
 
 @JvmSynthetic
 inline fun ItemStack.leatherArmorMeta(block: LeatherArmorMeta.() -> Unit): ItemStack {
 	return meta { block(this as LeatherArmorMeta) }
 }
 
+/*
 @JvmSynthetic
 inline fun ItemStack.knowledgeBookMeta(block: KnowledgeBookMeta.() -> Unit): ItemStack {
 	return meta { block(this as KnowledgeBookMeta) }
 }
+*/
 
 @JvmSynthetic
 inline fun ItemStack.fireWorkEffectMeta(block: FireworkEffectMeta.() -> Unit): ItemStack {
@@ -94,17 +98,21 @@ fun ItemStack.fireWorkMeta(consumer: Consumer<FireworkMeta>) = fireWorkMeta {
 	consumer.accept(this)
 }
 
+/*
 fun ItemStack.spawnEggMeta(consumer: Consumer<SpawnEggMeta>) = spawnEggMeta {
 	consumer.accept(this)
 }
+*/
 
 fun ItemStack.leatherArmorMeta(consumer: Consumer<LeatherArmorMeta>) = leatherArmorMeta {
 	consumer.accept(this)
 }
 
+/*
 fun ItemStack.knowledgeBookMeta(consumer: Consumer<KnowledgeBookMeta>) = knowledgeBookMeta {
 	consumer.accept(this)
 }
+*/
 
 fun ItemStack.fireWorkEffectMeta(consumer: Consumer<FireworkEffectMeta>) = fireWorkEffectMeta {
 	consumer.accept(this)
