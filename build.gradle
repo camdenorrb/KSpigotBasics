@@ -4,10 +4,6 @@ version '1.0.2'
 buildscript {
 
 	ext {
-		dokkaVersion = '0.9.17'
-		shadowVersion = '2.0.4'
-		kotlinVersion = '1.2.71'
-		coroutineVersion = '0.30.1'
 		spigotVersion = '1.12.2-R0.1-SNAPSHOT'
     }
 
@@ -16,9 +12,9 @@ buildscript {
     }
 
     dependencies {
-	    classpath "org.jetbrains.dokka:dokka-gradle-plugin:$dokkaVersion"
-	    classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
-	    classpath "com.github.jengelman.gradle.plugins:shadow:$shadowVersion"
+	    classpath "org.jetbrains.dokka:dokka-gradle-plugin:+"
+	    classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:+"
+	    classpath "com.github.jengelman.gradle.plugins:shadow:+"
     }
 }
 
@@ -42,17 +38,17 @@ dependencies {
 
 	compileOnly "org.spigotmc:spigot:$spigotVersion"
 
-	compile "com.sxtanna.db:Kuery:1.5"
-	compile "com.sxtanna.database:Kedis:1.1"
+	compile "com.sxtanna.db:Kuery:+"
+	compile "com.sxtanna.database:Kedis:+"
 
-	compile "me.camdenorrb:MiniBus:1.2.3"
-	compile "com.okkero.skedule:skedule:1.2.3"
+	compile "me.camdenorrb:MiniBus:+"
+	compile "com.okkero.skedule:skedule:+"
 
-	compile "org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion"
-	compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
+	compile "org.jetbrains.kotlin:kotlin-reflect:+"
+	compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:+"
 
 	//https://github.com/Kotlin/kotlinx.coroutines/issues/659
-	compile("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutineVersion") {
+	compile("org.jetbrains.kotlinx:kotlinx-coroutines-core:+") {
 		exclude group: "org.jetbrains.kotlinx", module: "atomicfu-common"
 	}
 
