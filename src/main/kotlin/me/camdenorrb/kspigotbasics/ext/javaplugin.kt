@@ -2,10 +2,11 @@
 
 package me.camdenorrb.kspigotbasics.ext
 
+import me.camdenorrb.kdi.ext.inject
 import me.camdenorrb.kspigotbasics.cmd.SCmdInfo
 import me.camdenorrb.kspigotbasics.struct.bungeeMessenger
-import me.camdenorrb.kspigotbasics.struct.miniBus
 import me.camdenorrb.kspigotbasics.struct.pluginManager
+import me.camdenorrb.minibus.MiniBus
 import me.camdenorrb.minibus.listener.MiniListener
 import org.bukkit.command.CommandExecutor
 import org.bukkit.event.Listener
@@ -13,7 +14,9 @@ import org.bukkit.plugin.java.JavaPlugin
 import org.bukkit.plugin.messaging.PluginMessageListener
 
 
-fun JavaPlugin.register(vararg listeners: MiniListener) = listeners.forEach {
+// TODO: Make a JavaPlugin wrapper
+
+fun JavaPlugin.register(miniBus: MiniBus = inject(), vararg listeners: MiniListener) = listeners.forEach {
 	miniBus.register(it)
 }
 

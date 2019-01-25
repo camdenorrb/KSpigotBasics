@@ -1,19 +1,28 @@
 package me.camdenorrb.kspigotbasics
 
+import me.camdenorrb.kdi.KDI
 import me.camdenorrb.kspigotbasics.cache.KBasicPlayerCache
 import me.camdenorrb.kspigotbasics.cache.ReflectCache
 import me.camdenorrb.kspigotbasics.ext.register
 import me.camdenorrb.kspigotbasics.listeners.CoreListener
-import me.camdenorrb.kspigotbasics.struct.miniBus
+import me.camdenorrb.kspigotbasics.listeners.WrapperListener
+import me.camdenorrb.minibus.MiniBus
 import org.bukkit.plugin.java.JavaPlugin
 
 
 class KSpigotBasics : JavaPlugin() {
 
-	override fun onLoad() { instance = this }
+	val miniBus = MiniBus()
+
+	override fun onLoad() {
+		KDI.insertAll {
+			producer { this }
+			producer { miniBus }
+		}
+	}
 
 	override fun onEnable() {
-		register(CoreListener())
+		register(CoreListener(), WrapperListener())
 		modules.forEach { it.enable() }
 	}
 
@@ -26,9 +35,6 @@ class KSpigotBasics : JavaPlugin() {
 	companion object {
 
 		val modules = arrayOf(ReflectCache, KBasicPlayerCache) //DisguiseCache
-
-		lateinit var instance: KSpigotBasics
-			private set
 
 	}
 

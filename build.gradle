@@ -40,8 +40,10 @@ dependencies {
 
 	compile "com.sxtanna.db:Kuery:+"
 	compile "com.sxtanna.database:Kedis:+"
-
+	
+	compile "me.camdenorrb:KDI:+"
 	compile "me.camdenorrb:MiniBus:+"
+	
 	compile "com.okkero.skedule:skedule:+"
 
 	compile "org.jetbrains.kotlin:kotlin-reflect:+"

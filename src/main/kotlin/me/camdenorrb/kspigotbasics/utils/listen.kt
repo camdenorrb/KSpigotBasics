@@ -3,8 +3,9 @@
 
 package me.camdenorrb.kspigotbasics.utils
 
+import me.camdenorrb.kdi.ext.inject
+import me.camdenorrb.kspigotbasics.KSpigotBasics
 import me.camdenorrb.kspigotbasics.struct.pluginManager
-import me.camdenorrb.kspigotbasics.struct.spigotBasics
 import org.bukkit.entity.Player
 import org.bukkit.event.Event
 import org.bukkit.event.EventPriority
@@ -12,13 +13,14 @@ import org.bukkit.event.EventPriority.NORMAL
 import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerEvent
 import org.bukkit.plugin.EventExecutor
+import org.bukkit.plugin.java.JavaPlugin
 import java.util.*
 import java.util.function.BiConsumer
 
 
 @JvmOverloads
 @JvmName("listen")
-fun <E : Event> JListen(eventClazz: Class<out E>, priority: EventPriority = NORMAL, ignoreCancelled: Boolean = true, consumer: BiConsumer<Listener, E>): Listener {
+fun <E : Event> JListen(eventClazz: Class<out E>, priority: EventPriority = NORMAL, ignoreCancelled: Boolean = true, plugin: JavaPlugin = inject<KSpigotBasics>(), consumer: BiConsumer<Listener, E>): Listener {
 
 	val listener = object : Listener, EventExecutor {
 
@@ -26,12 +28,12 @@ fun <E : Event> JListen(eventClazz: Class<out E>, priority: EventPriority = NORM
 
 	}
 
-	pluginManager.registerEvent(eventClazz, listener, priority, listener, spigotBasics, ignoreCancelled)
+	pluginManager.registerEvent(eventClazz, listener, priority, listener, plugin, ignoreCancelled)
 	return listener
 }
 
 @JvmSynthetic
-inline fun <reified E : Event> listen(priority: EventPriority = NORMAL, ignoreCancelled: Boolean = true, noinline block: Listener.(E) -> Unit): Listener {
+inline fun <reified E : Event> listen(priority: EventPriority = NORMAL, ignoreCancelled: Boolean = true, plugin: JavaPlugin = inject<KSpigotBasics>(), noinline block: Listener.(E) -> Unit): Listener {
 
 	val listener = object : Listener, EventExecutor {
 
@@ -39,18 +41,18 @@ inline fun <reified E : Event> listen(priority: EventPriority = NORMAL, ignoreCa
 
 	}
 
-	pluginManager.registerEvent(E::class.java, listener, priority, listener, spigotBasics, ignoreCancelled)
+	pluginManager.registerEvent(E::class.java, listener, priority, listener, plugin, ignoreCancelled)
 	return listener
 }
 
 
 @JvmSynthetic
-inline fun <reified E : PlayerEvent> playerListen(player: Player, priority: EventPriority = NORMAL, ignoreCancelled: Boolean = true, noinline block: Listener.(E) -> Unit): Listener {
-	return playerListen(player.uniqueId, priority, ignoreCancelled, block)
+inline fun <reified E : PlayerEvent> playerListen(player: Player, priority: EventPriority = NORMAL, ignoreCancelled: Boolean = true, plugin: JavaPlugin = inject<KSpigotBasics>(), noinline block: Listener.(E) -> Unit): Listener {
+	return playerListen(player.uniqueId, priority, ignoreCancelled, plugin, block)
 }
 
 @JvmSynthetic
-inline fun <reified E : PlayerEvent> playerListen(playerUid: UUID, priority: EventPriority = NORMAL, ignoreCancelled: Boolean = true, noinline block: Listener.(E) -> Unit): Listener {
+inline fun <reified E : PlayerEvent> playerListen(playerUid: UUID, priority: EventPriority = NORMAL, ignoreCancelled: Boolean = true, plugin: JavaPlugin = inject<KSpigotBasics>(), noinline block: Listener.(E) -> Unit): Listener {
 
 	val listener = object : Listener, EventExecutor {
 
@@ -60,20 +62,20 @@ inline fun <reified E : PlayerEvent> playerListen(playerUid: UUID, priority: Eve
 
 	}
 
-	pluginManager.registerEvent(E::class.java, listener, priority, listener, spigotBasics, ignoreCancelled)
+	pluginManager.registerEvent(E::class.java, listener, priority, listener, plugin, ignoreCancelled)
 	return listener
 }
 
 
 @JvmOverloads
 @JvmName("playerListen")
-fun <E : PlayerEvent> jPlayerListen(player: Player, eventClazz: Class<out E>, priority: EventPriority = NORMAL, ignoreCancelled: Boolean = true, consumer: BiConsumer<Listener, E>): Listener {
-	return jPlayerListen(player.uniqueId, eventClazz, priority, ignoreCancelled, consumer)
+fun <E : PlayerEvent> jPlayerListen(player: Player, eventClazz: Class<out E>, priority: EventPriority = NORMAL, ignoreCancelled: Boolean = true, plugin: JavaPlugin = inject<KSpigotBasics>(), consumer: BiConsumer<Listener, E>): Listener {
+	return jPlayerListen(player.uniqueId, eventClazz, priority, ignoreCancelled, plugin, consumer)
 }
 
 @JvmOverloads
 @JvmName("playerListen")
-fun <E : PlayerEvent> jPlayerListen(playerUid: UUID, eventClazz: Class<out E>, priority: EventPriority = NORMAL, ignoreCancelled: Boolean = true, consumer: BiConsumer<Listener, E>): Listener {
+fun <E : PlayerEvent> jPlayerListen(playerUid: UUID, eventClazz: Class<out E>, priority: EventPriority = NORMAL, ignoreCancelled: Boolean = true, plugin: JavaPlugin = inject<KSpigotBasics>(), consumer: BiConsumer<Listener, E>): Listener {
 
 	val listener = object : Listener, EventExecutor {
 
@@ -83,6 +85,6 @@ fun <E : PlayerEvent> jPlayerListen(playerUid: UUID, eventClazz: Class<out E>, p
 
 	}
 
-	pluginManager.registerEvent(eventClazz, listener, priority, listener, spigotBasics, ignoreCancelled)
+	pluginManager.registerEvent(eventClazz, listener, priority, listener, plugin, ignoreCancelled)
 	return listener
 }

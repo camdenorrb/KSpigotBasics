@@ -3,16 +3,9 @@
 
 package me.camdenorrb.kspigotbasics.struct
 
-import me.camdenorrb.kspigotbasics.KSpigotBasics
 import me.camdenorrb.kspigotbasics.cache.ReflectCache.retrieveMethod
 import me.camdenorrb.kspigotbasics.utils.nmsClass
-import me.camdenorrb.minibus.MiniBus
 import org.bukkit.World
-
-
-val miniBus by lazy { MiniBus() }
-
-val spigotBasics by lazy { KSpigotBasics.instance }
 
 
 val mainWorld: World by lazy { server.worlds.first() }

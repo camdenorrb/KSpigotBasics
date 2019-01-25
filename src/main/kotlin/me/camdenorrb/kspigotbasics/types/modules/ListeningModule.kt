@@ -1,14 +1,16 @@
 package me.camdenorrb.kspigotbasics.types.modules
 
-import me.camdenorrb.kspigotbasics.struct.miniBus
+import me.camdenorrb.kdi.ext.inject
+import me.camdenorrb.kspigotbasics.KSpigotBasics
 import me.camdenorrb.kspigotbasics.struct.server
-import me.camdenorrb.kspigotbasics.struct.spigotBasics
+import me.camdenorrb.minibus.MiniBus
 import me.camdenorrb.minibus.listener.MiniListener
 import org.bukkit.event.HandlerList
 import org.bukkit.event.Listener
+import org.bukkit.plugin.java.JavaPlugin
 
 
-abstract class ListeningModule : ModuleImpl(), Listener, MiniListener {
+abstract class ListeningModule(val plugin: JavaPlugin = inject<KSpigotBasics>(), val miniBus: MiniBus = inject()) : ModuleImpl(), Listener, MiniListener {
 
 	protected open fun onStart() = Unit
 
@@ -18,7 +20,7 @@ abstract class ListeningModule : ModuleImpl(), Listener, MiniListener {
 	final override fun onEnable() {
 		onStart()
 		miniBus.register(this)
-		server.pluginManager.registerEvents(this, spigotBasics)
+		server.pluginManager.registerEvents(this, plugin)
 	}
 
 	final override fun onDisable() {

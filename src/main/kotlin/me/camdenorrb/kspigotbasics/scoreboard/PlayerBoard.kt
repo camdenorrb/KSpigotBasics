@@ -1,12 +1,14 @@
 package me.camdenorrb.kspigotbasics.scoreboard
 
+import me.camdenorrb.kdi.ext.inject
+import me.camdenorrb.kspigotbasics.KSpigotBasics
 import me.camdenorrb.kspigotbasics.struct.server
-import me.camdenorrb.kspigotbasics.struct.spigotBasics
 import me.camdenorrb.kspigotbasics.types.modules.ListeningModule
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.player.PlayerEvent
 import org.bukkit.event.player.PlayerQuitEvent
+import org.bukkit.plugin.java.JavaPlugin
 import org.bukkit.scheduler.BukkitTask
 
 
@@ -20,7 +22,7 @@ data class PlayerBoard(val player: Player) : Board() {
 
 }
 
-abstract class PlayerBoards : ListeningModule(), (Player) -> Unit {
+abstract class PlayerBoards(plugin: JavaPlugin = inject<KSpigotBasics>()) : ListeningModule(plugin), (Player) -> Unit {
 
 	val boards = mutableListOf<PlayerBoard>()
 
@@ -41,7 +43,7 @@ abstract class PlayerBoards : ListeningModule(), (Player) -> Unit {
 
 
 	final override fun onStart() {
-		cleanUpTask = server.scheduler.runTaskTimerAsynchronously(spigotBasics, ::cleanUp, 6000, 6000)
+		cleanUpTask = server.scheduler.runTaskTimerAsynchronously(plugin, ::cleanUp, 6000, 6000)
 		onInitiate()
 	}
 

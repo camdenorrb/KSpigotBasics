@@ -1,13 +1,14 @@
 package me.camdenorrb.kspigotbasics.listeners
 
+import me.camdenorrb.kdi.ext.inject
 import me.camdenorrb.kspigotbasics.events.PlayerMoveBlockEvent
-import me.camdenorrb.kspigotbasics.struct.miniBus
+import me.camdenorrb.minibus.MiniBus
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerMoveEvent
 
 
-class CoreListener : Listener {
+class CoreListener(val miniBus: MiniBus = inject()) : Listener {
 
 	@EventHandler(ignoreCancelled = true)
 	fun PlayerMoveEvent.onBlockMove() {
