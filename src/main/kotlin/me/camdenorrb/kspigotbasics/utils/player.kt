@@ -17,5 +17,5 @@ fun findOfflinePlayer(uuid: UUID): OfflinePlayer?
 
 
 fun converseWith(player: Player, block: suspend Conversation.() -> Unit) {
-	Conversation(player, block = block)
+	Conversation(player, block = block).enable()
 }

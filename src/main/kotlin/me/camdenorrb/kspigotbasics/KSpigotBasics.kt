@@ -14,12 +14,14 @@ class KSpigotBasics : JavaPlugin() {
 
 	val miniBus = MiniBus()
 
+
 	override fun onLoad() {
 		KDI.insertAll {
-			producer { this }
+			producer { this@KSpigotBasics }
 			producer { miniBus }
 		}
 	}
+
 
 	override fun onEnable() {
 		register(CoreListener(), WrapperListener())
@@ -34,7 +36,9 @@ class KSpigotBasics : JavaPlugin() {
 
 	companion object {
 
-		val modules = arrayOf(ReflectCache, KBasicPlayerCache) //DisguiseCache
+		val modules by lazy {
+			arrayOf(ReflectCache, KBasicPlayerCache) //DisguiseCache
+		}
 
 	}
 

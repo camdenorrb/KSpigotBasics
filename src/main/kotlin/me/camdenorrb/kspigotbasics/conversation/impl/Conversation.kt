@@ -22,7 +22,7 @@ import org.bukkit.plugin.java.JavaPlugin
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
-class Conversation(override val target: Player, val plugin: JavaPlugin = inject<KSpigotBasics>(), val block: suspend Conversation.() -> Unit) : IConversation<Player>() {
+class Conversation(override val target: Player, val plugin: JavaPlugin = inject<KSpigotBasics>(), private val block: suspend Conversation.() -> Unit) : IConversation<Player>() {
 
 	private lateinit var job: Job
 
