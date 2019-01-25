@@ -13,7 +13,7 @@ buildscript {
 
     dependencies {
 	    classpath "org.jetbrains.dokka:dokka-gradle-plugin:+"
-	    classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.11"
+	    classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.20"
 	    classpath "com.github.jengelman.gradle.plugins:shadow:+"
     }
 }
@@ -38,17 +38,17 @@ dependencies {
 
 	compileOnly "org.spigotmc:spigot:$spigotVersion"
 
-	implementation "com.sxtanna.db:Kuery:+"
-	implementation "com.sxtanna.database:Kedis:+"
+	compile "com.sxtanna.db:Kuery:+"
+	compile "com.sxtanna.database:Kedis:+"
 
-	implementation "me.camdenorrb:MiniBus:+"
-	implementation "com.okkero.skedule:skedule:+"
+	compile "me.camdenorrb:MiniBus:+"
+	compile "com.okkero.skedule:skedule:+"
 
-	implementation "org.jetbrains.kotlin:kotlin-reflect:+"
-	implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:+"
+	compile "org.jetbrains.kotlin:kotlin-reflect:+"
+	compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:+"
 
 	//https://github.com/Kotlin/kotlinx.coroutines/issues/659
-	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:+") {
+	compile("org.jetbrains.kotlinx:kotlinx-coroutines-core:+") {
 		exclude group: "org.jetbrains.kotlinx", module: "atomicfu-common"
 	}
 
