@@ -28,6 +28,11 @@ fun playerBoards(construct: PlayerBoard.(Player) -> Unit): PlayerBoards {
 
 // For the Java users ;)
 
+/**
+ * 
+ *
+ * @param consumer
+ */
 @JvmName("board")
 fun jBoard(consumer: Consumer<Board>) = board {
 	consumer.accept(this)
