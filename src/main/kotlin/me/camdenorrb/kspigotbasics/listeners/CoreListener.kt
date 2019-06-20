@@ -10,12 +10,13 @@ import org.bukkit.event.player.PlayerMoveEvent
 
 class CoreListener(val miniBus: MiniBus = inject()) : Listener {
 
+	@kotlin.ExperimentalStdlibApi
 	@EventHandler(ignoreCancelled = true)
 	fun PlayerMoveEvent.onBlockMove() {
 
 		if (from.block == to.block) return
 
-		val result = miniBus(PlayerMoveBlockEvent(player, from, to))
+		val result = miniBus.invoke(PlayerMoveBlockEvent(player, from, to))
 		isCancelled = result.isCancelled
 	}
 
