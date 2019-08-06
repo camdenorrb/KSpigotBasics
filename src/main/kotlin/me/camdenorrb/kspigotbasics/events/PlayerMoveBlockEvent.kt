@@ -8,8 +8,8 @@ data class PlayerMoveBlockEvent(val player: Player, val from: Location, val to: 
 
 	var isCancelled: Boolean = false
 
-	val toBlock by lazy { to.block!! }
+	val toBlock by lazy { to.block }
 
-	val fromBlock by lazy { from.block!! }
+	val fromBlock by lazy { from.block }
 
 }

@@ -22,6 +22,7 @@ import org.bukkit.plugin.java.JavaPlugin
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
+
 class Conversation(override val target: Player, val plugin: JavaPlugin = inject<KSpigotBasics>(), private val block: suspend Conversation.() -> Unit) : IConversation<Player>() {
 
 	private lateinit var job: Job
@@ -80,23 +81,23 @@ class Conversation(override val target: Player, val plugin: JavaPlugin = inject<
 
 	// Waits for an event
 	suspend inline fun <reified E : Event> Conversation.waitForEvent() = suspendCoroutine<E> { cont ->
-		server.scheduler.runTask(plugin) {
+		server.scheduler.runTask(plugin, Runnable {
 			listen<E> {
 				cont.resume(it)
 				HandlerList.unregisterAll(this)
 			}
-		}
+		})
 	}
 
 	// Waits for an event caused by the target, then it cancels it and continues
  	suspend inline fun <reified E : PlayerEvent> Conversation.waitForTargetEvent() = suspendCoroutine<E> { cont ->
-		server.scheduler.runTask(plugin) {
+		server.scheduler.runTask(plugin, Runnable {
 			playerListen<E>(target) {
 				if (it is Cancellable) it.isCancelled = true
 				cont.resume(it)
 				HandlerList.unregisterAll(this)
 			}
-		}
+		})
 	}
 
 }

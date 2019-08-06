@@ -22,7 +22,7 @@ class LocAdapt : JsonSerializer<Location>, JsonDeserializer<Location> {
 		addProperty("z", loc.z)
 		addProperty("yaw", loc.yaw)
 		addProperty("pitch", loc.pitch)
-		addProperty("worldUUID", loc.world.uid.toString())
+		addProperty("worldUUID", loc.world?.uid.toString())
 	}
 
 }

@@ -20,6 +20,7 @@ import java.util.function.BiConsumer
 
 @JvmOverloads
 @JvmName("listen")
+
 fun <E : Event> JListen(eventClazz: Class<out E>, priority: EventPriority = NORMAL, ignoreCancelled: Boolean = true, plugin: JavaPlugin = inject<KSpigotBasics>(), consumer: BiConsumer<Listener, E>): Listener {
 
 	val listener = object : Listener, EventExecutor {
@@ -33,6 +34,7 @@ fun <E : Event> JListen(eventClazz: Class<out E>, priority: EventPriority = NORM
 }
 
 @JvmSynthetic
+
 inline fun <reified E : Event> listen(priority: EventPriority = NORMAL, ignoreCancelled: Boolean = true, plugin: JavaPlugin = inject<KSpigotBasics>(), noinline block: Listener.(E) -> Unit): Listener {
 
 	val listener = object : Listener, EventExecutor {
@@ -46,10 +48,12 @@ inline fun <reified E : Event> listen(priority: EventPriority = NORMAL, ignoreCa
 }
 
 
+
 @JvmSynthetic
 inline fun <reified E : PlayerEvent> playerListen(player: Player, priority: EventPriority = NORMAL, ignoreCancelled: Boolean = true, plugin: JavaPlugin = inject<KSpigotBasics>(), noinline block: Listener.(E) -> Unit): Listener {
 	return playerListen(player.uniqueId, priority, ignoreCancelled, plugin, block)
 }
+
 
 @JvmSynthetic
 inline fun <reified E : PlayerEvent> playerListen(playerUid: UUID, priority: EventPriority = NORMAL, ignoreCancelled: Boolean = true, plugin: JavaPlugin = inject<KSpigotBasics>(), noinline block: Listener.(E) -> Unit): Listener {
@@ -69,12 +73,14 @@ inline fun <reified E : PlayerEvent> playerListen(playerUid: UUID, priority: Eve
 
 @JvmOverloads
 @JvmName("playerListen")
+
 fun <E : PlayerEvent> jPlayerListen(player: Player, eventClazz: Class<out E>, priority: EventPriority = NORMAL, ignoreCancelled: Boolean = true, plugin: JavaPlugin = inject<KSpigotBasics>(), consumer: BiConsumer<Listener, E>): Listener {
 	return jPlayerListen(player.uniqueId, eventClazz, priority, ignoreCancelled, plugin, consumer)
 }
 
 @JvmOverloads
 @JvmName("playerListen")
+
 fun <E : PlayerEvent> jPlayerListen(playerUid: UUID, eventClazz: Class<out E>, priority: EventPriority = NORMAL, ignoreCancelled: Boolean = true, plugin: JavaPlugin = inject<KSpigotBasics>(), consumer: BiConsumer<Listener, E>): Listener {
 
 	val listener = object : Listener, EventExecutor {

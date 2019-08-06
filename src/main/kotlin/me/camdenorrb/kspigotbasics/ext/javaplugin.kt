@@ -25,13 +25,13 @@ fun JavaPlugin.register(vararg listeners: Listener) = listeners.forEach {
 }
 
 fun JavaPlugin.register(vararg cmds: SCmdInfo) = cmds.forEach {
-	getCommand(it.name).executor = it.executor
+	getCommand(it.name)?.setExecutor(it.executor)
 }
 
 
 @JvmSynthetic
 fun JavaPlugin.register(vararg cmds: Pair<String, CommandExecutor>) = cmds.forEach {
-	getCommand(it.first).executor = it.second
+	getCommand(it.first)?.setExecutor(it.second)
 }
 
 

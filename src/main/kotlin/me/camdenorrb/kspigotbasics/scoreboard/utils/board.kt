@@ -13,6 +13,7 @@ import java.util.function.Consumer
 fun board(block: Board.() -> Unit) = Board().also(block)
 
 @JvmSynthetic
+
 fun playerBoards(construct: PlayerBoard.(Player) -> Unit): PlayerBoards {
 
 	val board = object : PlayerBoards() {
@@ -37,6 +38,7 @@ fun playerBoards(construct: PlayerBoard.(Player) -> Unit): PlayerBoards {
 fun jBoard(consumer: Consumer<Board>) = board {
 	consumer.accept(this)
 }
+
 
 @JvmName("playerBoards")
 fun jPlayerBoards(consumer: Consumer<PlayerBoard>) = playerBoards {

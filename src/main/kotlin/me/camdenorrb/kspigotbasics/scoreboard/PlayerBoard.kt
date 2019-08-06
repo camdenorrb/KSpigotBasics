@@ -16,6 +16,7 @@ data class PlayerBoard(val player: Player) : Board() {
 
 	var onUnloadBlock: () -> Unit = {}
 
+	
 	inline fun <reified E : PlayerEvent> SideBarBuilder.playerListeningText(initial: String = "", noinline block: E.() -> String) {
 		this.playerListeningText(player, initial, block)
 	}
@@ -57,7 +58,7 @@ abstract class PlayerBoards(plugin: JavaPlugin = inject<KSpigotBasics>()) : List
 		boards.forEach { board ->
 			val player = board.player
 			if (player.scoreboard != board.scoreboard) return@forEach
-			player.scoreboard = server.scoreboardManager.mainScoreboard
+			player.scoreboard = server.scoreboardManager!!.mainScoreboard
 			unload(player)
 		}
 

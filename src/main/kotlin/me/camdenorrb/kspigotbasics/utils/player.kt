@@ -16,6 +16,7 @@ fun findOfflinePlayer(uuid: UUID): OfflinePlayer?
 	= server.getPlayer(uuid) ?: server.offlinePlayers.find { it.uniqueId == uuid }
 
 
+
 fun converseWith(player: Player, block: suspend Conversation.() -> Unit) {
 	Conversation(player, block = block).enable()
 }

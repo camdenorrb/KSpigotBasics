@@ -8,11 +8,14 @@ import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerMoveEvent
 
 
+
 class CoreListener(val miniBus: MiniBus = inject()) : Listener {
 
-	@kotlin.ExperimentalStdlibApi
+
 	@EventHandler(ignoreCancelled = true)
 	fun PlayerMoveEvent.onBlockMove() {
+
+		val to = to ?: return
 
 		if (from.block == to.block) return
 

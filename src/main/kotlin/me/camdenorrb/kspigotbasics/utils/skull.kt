@@ -4,25 +4,25 @@
 package me.camdenorrb.kspigotbasics.utils
 
 import me.camdenorrb.kspigotbasics.ext.skullMeta
-import org.bukkit.Material.SKULL_ITEM
+import org.bukkit.Material.LEGACY_SKULL_ITEM
 import org.bukkit.OfflinePlayer
 import org.bukkit.inventory.ItemStack
 import java.util.*
 
 
-fun skull() = ItemStack(SKULL_ITEM, 1, 3)
+fun skull() = ItemStack(LEGACY_SKULL_ITEM, 1, 3)
 
 
-fun skull(uuid: UUID) = ItemStack(SKULL_ITEM, 1, 3).skullMeta {
+fun skull(uuid: UUID) = ItemStack(LEGACY_SKULL_ITEM, 1, 3).skullMeta {
 	findOfflinePlayer(uuid)!!.skull()
 }
 
 // TODO: Use reflection.
-fun OfflinePlayer.skull() = ItemStack(SKULL_ITEM, 1, 3).skullMeta {
-	skull(this@skull.name)
+fun OfflinePlayer.skull() = ItemStack(LEGACY_SKULL_ITEM, 1, 3).skullMeta {
+	skull(this@skull.name ?: "")
 }
 
-fun skull(playerName: String) = ItemStack(SKULL_ITEM, 1, 3).skullMeta {
+fun skull(playerName: String) = ItemStack(LEGACY_SKULL_ITEM, 1, 3).skullMeta {
 	owner = playerName
 }
 

@@ -8,6 +8,7 @@ import org.bukkit.inventory.ItemStack
 import java.util.function.Consumer
 
 
+
 class ChestSlot internal constructor(val item: ItemStack, val slot: Int) {
 
 	val actions = mutableMapOf<ClickType, ChestClickLambda>()
@@ -23,6 +24,7 @@ class ChestSlot internal constructor(val item: ItemStack, val slot: Int) {
 
 
 	@JvmOverloads
+
 	fun addAction(clickType: ClickType = LEFT, consumer: Consumer<ChestClickAction>)
 		= addAction(clickType) { consumer.accept(this) }
 

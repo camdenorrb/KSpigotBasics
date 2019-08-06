@@ -29,7 +29,7 @@ open class Board : Openable<Player> {
 	var onOpenBlock: (Player) -> Unit = {}
 	var onCloseBlock: (Player) -> Unit = {}
 
-	internal val scoreboard = server.scoreboardManager.newScoreboard!!
+	internal val scoreboard = server.scoreboardManager!!.newScoreboard
 
 
 	var sideBar: SideBar? = null
@@ -55,7 +55,7 @@ open class Board : Openable<Player> {
 	}
 
 	override fun close(target: Player) {
-		close(target, Bukkit.getScoreboardManager().mainScoreboard)
+		close(target, Bukkit.getScoreboardManager()!!.mainScoreboard)
 	}
 
 	fun close(target: Player, newBoard: Scoreboard) {
@@ -231,6 +231,7 @@ open class Board : Openable<Player> {
 
 		// TODO: Better Java support.
 		// TODO: Possibly set a default prefix and default value instead of the text itself. It can be 2 functions if needed.
+		
 		@JvmSynthetic
 		inline fun <reified E : Event> listeningText(initial: String = "", noinline block: E.() -> String) {
 
@@ -248,6 +249,7 @@ open class Board : Openable<Player> {
 		}
 
 
+		
 		@JvmSynthetic
 		inline fun <reified E : PlayerEvent> playerListeningText(player: Player, initial: String = "", noinline block: E.() -> String) {
 

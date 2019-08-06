@@ -23,6 +23,7 @@ private val outTitleConstruct by lazy {
 
 data class Title @JvmOverloads constructor(var title: String, var subtitle: String, var fadeIn: Int = 1, var stay: Int = 1, var fadeOut: Int = 1) {
 
+	
 	fun send(player: Player) {
 
 		val chatTitle = chatSerializerAMethod.invoke(null, """{"text": "$title"}""")
@@ -36,6 +37,7 @@ data class Title @JvmOverloads constructor(var title: String, var subtitle: Stri
 		basicPlayer.sendPacket(subTitlePacket)
 	}
 
+	
 	fun sendAll() {
 
 		val chatTitle = chatSerializerAMethod.invoke(null, """{"text": "$title"}""")

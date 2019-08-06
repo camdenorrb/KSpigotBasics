@@ -7,6 +7,7 @@ import me.camdenorrb.kspigotbasics.types.modules.Module
 import org.bukkit.entity.Player
 
 
+
 abstract class PlayerChestGui(val title: String, val size: Int = 27) : Gui, Module, (Player) -> ChestGui {
 
 	val playerChests = mutableMapOf<Player, ChestGui>()

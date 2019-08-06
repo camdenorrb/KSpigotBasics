@@ -9,17 +9,18 @@ import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
 
 
+
 open class PagedChestGui : Gui {
 
 	val pages = mutableListOf<ChestGui>()
 
 
 	open val lastPagePointer = ItemStack(FEATHER).meta {
-		displayName = "${GREEN}Last Page"
+		setDisplayName("${GREEN}Last Page")
 	}
 
 	open val nextPagePointer = ItemStack(FEATHER).meta {
-		displayName = "${RED}Next Page"
+		setDisplayName("${RED}Next Page")
 	}
 
 	

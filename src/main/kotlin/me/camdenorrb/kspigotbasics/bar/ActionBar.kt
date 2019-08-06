@@ -19,6 +19,7 @@ private val gameInfoType by lazy {
 data class ActionBar(val text: String) {
 
 
+
 	fun send(player: Player) {
 
 		val serializer = chatSerializerAMethod.invoke(null, """{"text": "$text"}""")
@@ -30,6 +31,7 @@ data class ActionBar(val text: String) {
 
 		player.kBasic().sendPacket(packetObject)
 	}
+
 
 	fun sendAll() {
 

@@ -13,6 +13,7 @@ import org.bukkit.inventory.Inventory
 import org.bukkit.plugin.java.JavaPlugin
 
 
+
 class ChestClickAction(val clickedGui: ChestGui, val clickEvent: InventoryClickEvent, val plugin: JavaPlugin = inject<KSpigotBasics>()) {
 
 	var isCancelled: Boolean
@@ -38,12 +39,12 @@ class ChestClickAction(val clickedGui: ChestGui, val clickEvent: InventoryClickE
 	val isShiftClick by lazy { clickEvent.isShiftClick }
 
 
-	val click by lazy { clickEvent.click!! }
+	val click by lazy { clickEvent.click }
 
 	val cursor by lazy { clickEvent.cursor!! }
 
 
-	val viewers by lazy { clickEvent.viewers!! }
+	val viewers by lazy { clickEvent.viewers }
 
 	val whoClicked by lazy { clickEvent.whoClicked as Player }
 
@@ -56,22 +57,22 @@ class ChestClickAction(val clickedGui: ChestGui, val clickEvent: InventoryClickE
 
 	// Safety precautions, as stated in the InventoryClickEvent JavaDocs.
 
-	fun switchGui(gui: Gui) = scheduler.runTask(plugin) {
+	fun switchGui(gui: Gui) = scheduler.runTask(plugin, Runnable {
 		gui.open(whoClicked)
-	}!!
+	})
 
-	fun closeGui() = scheduler.runTask(plugin) {
+	fun closeGui() = scheduler.runTask(plugin, Runnable {
 		whoClicked.closeInventory()
-	}!!
+	})
 
-	fun switchInventory(inventory: Inventory) = scheduler.runTask(plugin) {
+	fun switchInventory(inventory: Inventory) = scheduler.runTask(plugin, Runnable {
 		whoClicked.openInventory(inventory)
-	}!!
+	})
 
 
 	@JvmOverloads
-	fun openWorkbench(location: Location, force: Boolean = false) = scheduler.runTask(plugin) {
+	fun openWorkbench(location: Location, force: Boolean = false) = scheduler.runTask(plugin, Runnable {
 		whoClicked.openWorkbench(location, force)
-	}!!
+	})
 
 }

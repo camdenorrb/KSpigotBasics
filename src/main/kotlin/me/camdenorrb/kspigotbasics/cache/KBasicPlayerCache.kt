@@ -9,6 +9,7 @@ import org.bukkit.event.player.PlayerJoinEvent
 import org.bukkit.event.player.PlayerQuitEvent
 
 
+
 object KBasicPlayerCache : ListeningModule() {
 
 	val basicPlayers = mutableMapOf<Player, KBasicPlayer>()

@@ -11,7 +11,7 @@ import java.util.function.Consumer
 
 @JvmSynthetic
 inline fun ItemStack.meta(block: ItemMeta.() -> Unit): ItemStack {
-	itemMeta = itemMeta.also(block)
+	itemMeta = itemMeta?.also(block)
 	return this
 }
 
