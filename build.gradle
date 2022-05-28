@@ -57,6 +57,7 @@ dependencies {
 
 	//compile "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutineVersion"
 }
+
 /*
 dokkaHtml {
 	outputFormat = 'javadoc'
