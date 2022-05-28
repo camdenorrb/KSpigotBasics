@@ -21,7 +21,7 @@ dependencies {
 	implementation("com.sxtanna.db:Kuery:+")
 	implementation("com.sxtanna.database:Kedis:+")
 	implementation("com.github.camdenorrb:KDI:V1.0.1")
-	implementation("com.github.MiniMineCraft:MiniBus:V1.2.6")
+	implementation("com.github.MiniMineCraft:MiniBus:1.2.9")
 	implementation("com.github.okkero:Skedule:v1.2.6")
 	implementation("org.jetbrains.kotlin:kotlin-reflect:+")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:+")
