@@ -45,12 +45,13 @@ dokkaHtml {
 
 tasks {
 	compileKotlin {
-		kotlinOptions.jvmTarget = "1.8"
 		kotlinOptions.freeCompilerArgs = listOf("-Xuse-experimental=kotlin.ExperimentalStdlibApi")
 	}
-
-	compileTestKotlin {
-		kotlinOptions.jvmTarget = "1.8"
+	shadowJar {
+		relocate("org.jetbrains", "me.camdenorrb.kspigotbasics.libs.org.jetbrains")
+		relocate("org.intellij", "me.camdenorrb.kspigotbasics.libs.org.intellij")
+		relocate("com.google", "me.camdenorrb.kspigotbasics.libs.com.google")
+		relocate("kotlin", "me.camdenorrb.kspigotbasics.libs.kotlin")
 	}
 }
 
