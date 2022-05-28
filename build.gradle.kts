@@ -18,13 +18,15 @@ dependencies {
 
 	compileOnly("org.spigotmc:spigot-api:1.18.2-R0.1-SNAPSHOT")
 
+	implementation(kotlin("reflect"))
+	implementation(kotlin("stdlib-jdk8"))
+	
 	implementation("com.sxtanna.db:Kuery:1.6")
 	implementation("com.sxtanna.database:Kedis:1.2")
 	implementation("com.github.camdenorrb:KDI:V1.0.1")
 	implementation("me.camdenorrb:MiniBus:1.4.0")
 	implementation("com.github.okkero:Skedule:v1.2.6")
-	implementation("org.jetbrains.kotlin:kotlin-reflect:1.6.21")
-	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.6.21")
+
 
 	//https://github.com/Kotlin/kotlinx.coroutines/issues/659
 
