@@ -5,3 +5,9 @@ sourceControl {
 		producesModule("me.camdenorrb:MiniBus")
 	}
 }
+
+sourceControl {
+	gitRepository(java.net.URI.create("https://github.com/camdenorrb/KDI.git")) {
+		producesModule("me.camdenorrb:KDI")
+	}
+}
