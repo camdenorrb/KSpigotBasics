@@ -10,17 +10,26 @@ import org.bukkit.inventory.ItemStack
 
 class PlayerBlockPlaceEvent(private val event: BlockPlaceEvent) : PlayerEvent(event.player), Cancellable {
 
-	val blockPlaced: Block
-		get() = event.blockPlaced
+	val blockPlaced by lazy {
+		event.blockPlaced
+	}
 
-	val itemInHand: ItemStack
-		get() = event.itemInHand
+	val itemInHand by lazy {
+		event.itemInHand
+	}
 
-	val blockAgainst: Block
-		get() = event.blockAgainst
 
-	val blockReplacedState: BlockState
-		get() = event.blockReplacedState
+	val blockAgainst by lazy {
+		event.blockAgainst
+	}
+
+	val blockPlacedType by lazy {
+		blockPlaced.type
+	}
+
+	val blockReplacedState by lazy {
+		event.blockReplacedState
+	}
 
 
 	var canBuild: Boolean

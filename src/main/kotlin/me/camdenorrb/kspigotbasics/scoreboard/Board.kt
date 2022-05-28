@@ -221,7 +221,9 @@ open class Board : Openable<Player> {
 		fun emptyLine() = text("")
 
 
-		fun text(vararg text: String) = text.forEach(this::text)
+		fun text(vararg text: String) {
+			text.forEach(this::text)
+		}
 
 		fun text(text: String) {
 			check(currentIndex in 0..realSize) { "Tried to add a entry out of range!" }

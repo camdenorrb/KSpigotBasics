@@ -2,3 +2,5 @@ name: KSpigotBasics
 version: Kat1.0.2
 author: MrKitty_Cat
 main: me.camdenorrb.kspigotbasics.KSpigotBasics
+
+api-version: "1.13"

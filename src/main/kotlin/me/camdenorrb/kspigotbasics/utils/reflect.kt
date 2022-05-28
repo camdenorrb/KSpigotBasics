@@ -6,7 +6,9 @@ import me.camdenorrb.kspigotbasics.cache.ReflectCache
 import me.camdenorrb.kspigotbasics.struct.server
 
 
-private val version by lazy { server.javaClass.`package`.name.substring(23) }
+private val version by lazy {
+    server.javaClass.`package`.name.substring(23)
+}
 
 
 fun nmsClass(name: String) = ReflectCache.retrieveClass("net.minecraft.server.$version.$name")

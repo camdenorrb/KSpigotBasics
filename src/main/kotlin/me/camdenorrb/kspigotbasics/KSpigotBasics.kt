@@ -14,29 +14,20 @@ class KSpigotBasics : JavaPlugin() {
 
 	val miniBus = MiniBus()
 
-
-
 	override fun onLoad() {
 		KDI.insertAll {
 			producer { this@KSpigotBasics }
 			producer { miniBus }
 		}
 	}
-
-
-
 	override fun onEnable() {
 		register(CoreListener(), WrapperListener())
 		modules.forEach { it.enable() }
 	}
-
-
 	override fun onDisable() {
 		miniBus.cleanUp()
 		modules.forEach { it.disable() }
 	}
-
-
 
 	companion object {
 

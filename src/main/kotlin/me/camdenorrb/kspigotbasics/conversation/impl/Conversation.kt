@@ -42,8 +42,9 @@ class Conversation(override val target: Player, val plugin: JavaPlugin = inject<
 	}
 
 
-	suspend fun Conversation.waitForBlockPlace(): Block {
-		return waitForTargetEvent<PlayerBlockPlaceEvent>().blockPlaced
+
+	suspend fun Conversation.waitForBlockPlace(cancel: Boolean = true): PlayerBlockPlaceEvent {
+		return waitForTargetEvent(cancel)
 	}
 
 	suspend fun Conversation.waitForReply(): String {
@@ -90,10 +91,14 @@ class Conversation(override val target: Player, val plugin: JavaPlugin = inject<
 	}
 
 	// Waits for an event caused by the target, then it cancels it and continues
- 	suspend inline fun <reified E : PlayerEvent> Conversation.waitForTargetEvent() = suspendCoroutine<E> { cont ->
+ 	suspend inline fun <reified E : PlayerEvent> Conversation.waitForTargetEvent(cancel: Boolean = true) = suspendCoroutine<E> { cont ->
 		server.scheduler.runTask(plugin, Runnable {
 			playerListen<E>(target) {
-				if (it is Cancellable) it.isCancelled = true
+
+				if (cancel && it is Cancellable) {
+					it.isCancelled = true
+				}
+
 				cont.resume(it)
 				HandlerList.unregisterAll(this)
 			}
