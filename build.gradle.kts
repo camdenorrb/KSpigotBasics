@@ -30,7 +30,7 @@ dependencies {
 
 	//https://github.com/Kotlin/kotlinx.coroutines/issues/659
 
-	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.2") {
+	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3") {
 		exclude(group = "org.jetbrains.kotlinx", module = "atomicfu-common")
 	}
 
