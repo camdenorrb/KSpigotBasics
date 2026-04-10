@@ -16,7 +16,7 @@ repositories {
 
 dependencies {
 
-	compileOnly("org.spigotmc:spigot-api:26.1.1-R0.1-SNAPSHOT")
+	compileOnly("org.spigotmc:spigot-api:26.1.2-R0.1-SNAPSHOT")
 
 	implementation(kotlin("reflect"))
 	implementation(kotlin("stdlib-jdk8"))
